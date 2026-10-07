@@ -9,6 +9,7 @@ export const certificates: Certificate[] = [
     credentialId: "c5f3f7e9-103e-45fb-8e4b-a0b85a9137d1",
     credentialUrl: "https://www.credly.com/earner/earned/badge/c5f3f7e9-103e-45fb-8e4b-a0b85a9137d1",
     pdfFile: "/certificate/ccf.pdf",
+    previewImage: "/certificate/previews/ccf.webp",
   },
   {
     id: "2",
@@ -17,16 +18,16 @@ export const certificates: Certificate[] = [
     date: "April 2026",
     credentialId: "3949db19-2901-4d31-a76c-c2f975a79478",
     credentialUrl: "https://www.credly.com/earner/earned/badge/3949db19-2901-4d31-a76c-c2f975a79478",
-    pdfFile: "/certificate/j2c.pdf"
+    pdfFile: "/certificate/j2c.pdf",
+    previewImage: "/certificate/previews/j2c.webp",
   },
   {
     id: "3",
     title: "NDG Linux Unhatched",
     issuer: "Cisco",
     date: "September 2024",
-    credentialId: "-",
-    credentialUrl: "-",
-    pdfFile: "/certificate/linux.pdf"
+    pdfFile: "/certificate/linux.pdf",
+    previewImage: "/certificate/previews/linux.webp",
   },
   {
     id: "4",
@@ -35,7 +36,8 @@ export const certificates: Certificate[] = [
     date: "March 2026",
     credentialId: "KEXLQ9W50PG2",
     credentialUrl: "https://www.dicoding.com/certificates/KEXLQ9W50PG2",
-    pdfFile: "/certificate/dasarai.pdf"
+    pdfFile: "/certificate/dasarai.pdf",
+    previewImage: "/certificate/previews/dasarai.webp",
   },
   {
     id: "5",
@@ -45,6 +47,7 @@ export const certificates: Certificate[] = [
     credentialId: "N9ZON5EJ6XG5",
     credentialUrl: "https://www.dicoding.com/certificates/N9ZON5EJ6XG5",
     pdfFile: "/certificate/fabric.pdf",
+    previewImage: "/certificate/previews/fabric.webp",
   },
   {
     id: "6",
@@ -54,6 +57,7 @@ export const certificates: Certificate[] = [
     credentialId: "L4PQ983J2PO1",
     credentialUrl: "https://www.dicoding.com/certificates/L4PQ983J2PO1",
     pdfFile: "/certificate/finance.pdf",
+    previewImage: "/certificate/previews/finance.webp",
   },
   {
     id: "7",
@@ -63,6 +67,7 @@ export const certificates: Certificate[] = [
     credentialId: "MRZMWJYOKPYQ",
     credentialUrl: "https://www.dicoding.com/certificates/MRZMWJYOKPYQ",
     pdfFile: "/certificate/python.pdf",
+    previewImage: "/certificate/previews/python.webp",
   },
   {
     id: "8",
@@ -72,6 +77,7 @@ export const certificates: Certificate[] = [
     credentialId: "1OP8R493LZQK",
     credentialUrl: "https://www.dicoding.com/certificates/1OP8R493LZQK",
     pdfFile: "/certificate/genai.pdf",
+    previewImage: "/certificate/previews/genai.webp",
   },
   {
     id: "9",
@@ -81,6 +87,7 @@ export const certificates: Certificate[] = [
     credentialId: "NVP7N4O4OZR0",
     credentialUrl: "https://www.dicoding.com/certificates/NVP7N4O4OZR0",
     pdfFile: "/certificate/ai-productivity.pdf",
+    previewImage: "/certificate/previews/ai-productivity.webp",
   },
   {
     id: "10",
@@ -90,5 +97,6 @@ export const certificates: Certificate[] = [
     credentialId: "2VX307RN4XYQ",
     credentialUrl: "https://www.dicoding.com/certificates/2VX307RN4XYQ",
     pdfFile: "/certificate/bmlp.pdf",
-  }
+    previewImage: "/certificate/previews/bmlp.webp",
+  },
 ];

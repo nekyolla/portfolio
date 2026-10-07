@@ -1,68 +1,52 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { educations } from "@/data/education";
-import SectionHeading from "@/components/ui/SectionHeading";
+import SectionHeader from "@/components/ui/SectionHeader";
+import { Reveal } from "@/components/motion/Reveal";
 
 export default function Education() {
   return (
-    <section id="education" className="section-padding relative">
-      <div className="max-w-4xl mx-auto">
-        <SectionHeading title="Education" />
+    <section id="education" aria-labelledby="education-title" className="section">
+      <div className="container-page">
+        <SectionHeader id="education" label="Education" title="Academic" emphasis="foundation." />
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-neutral-800" />
+        <ol className="border-t border-line">
+          {educations.map((edu, index) => {
+            const [score, scale] = edu.gpa?.split("/") ?? [];
+            return (
+              <Reveal as="li" key={edu.id} delay={index * 0.08} className="border-b border-line">
+                <article className="grid gap-4 py-8 md:grid-cols-12 md:gap-6 md:py-10">
+                  <p className="eyebrow md:col-span-3 md:pt-2">{edu.period}</p>
 
-          <div className="space-y-8">
-            {educations.map((edu, index) => (
-              <motion.div
-                key={edu.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                className="relative pl-10"
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-0 top-6 w-[15px] h-[15px] rounded-full border-2 border-neutral-600 bg-black z-10" />
-
-                {/* Card */}
-                <div className="card card-hover p-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-white">
-                        {edu.institution}
-                      </h3>
-                      <p className="text-sm text-neutral-400 mt-1">
-                        {edu.degree} — {edu.major}
-                      </p>
-                    </div>
-                    <span className="badge text-xs whitespace-nowrap mt-1">
-                      {edu.period}
-                    </span>
+                  <div className="md:col-span-6">
+                    <h3 className="font-serif text-2xl tracking-tight md:text-3xl">{edu.institution}</h3>
+                    <p className="mt-2 text-fg-muted">
+                      {edu.degree} — {edu.major}
+                    </p>
+                    {edu.description && (
+                      <p className="mt-4 max-w-md text-sm leading-relaxed text-fg-subtle">{edu.description}</p>
+                    )}
+                    {edu.highlights && edu.highlights.length > 0 && (
+                      <ul className="mt-4 flex flex-wrap gap-2">
+                        {edu.highlights.map((h) => (
+                          <li key={h} className="tag">
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
 
-                  {/* Description */}
-                  {edu.description && (
-                    <p className="text-sm text-neutral-500 mt-4">
-                      {edu.description}
+                  {score && (
+                    <p className="md:col-span-3 md:text-right">
+                      <span className="eyebrow block md:mb-1">{scale === "100" ? "Final score" : "GPA"}</span>
+                      <span className="font-serif text-4xl tracking-tight md:text-5xl">{score}</span>
+                      {scale && <span className="ml-1 font-mono text-xs text-fg-subtle">/ {scale}</span>}
                     </p>
                   )}
-
-                  {/* GPA inline */}
-                  {edu.gpa && (
-                    <p className="text-sm text-neutral-400 mt-3">
-                      GPA: {edu.gpa}
-                      {edu.highlights && edu.highlights.length > 0 && ". "}
-                      {edu.highlights?.join(" & ")}
-                    </p>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+                </article>
+              </Reveal>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );

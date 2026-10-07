@@ -20,7 +20,7 @@ export const organizations: Organization[] = [
     role: "Research and Innovation Officer",
     period: "2024 - 2025",
     description:
-      "Part of the core team responsible for organizing web development workshops, study groups, and hackathons. Helping students learn modern web technologies.",
+      "Drove research and innovation programs that encouraged students to compete in academic and scientific competitions, and kept track of outstanding student achievements across the faculty.",
     achievements: [
       "Organized the 'Vokasi Goes to OLIVIA 2024' socialization program to increase student awareness and participation in the Indonesian Vocational Olympiad.",
       "Managed a data tracking system using digital forms to identify, record, and monitor outstanding students' achievements monthly.",

@@ -1,37 +1,61 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { skills } from "@/data/skills";
-import SectionHeading from "@/components/ui/SectionHeading";
+import type { Skill, SkillCategory } from "@/types";
+import SectionHeader from "@/components/ui/SectionHeader";
+import SkillIcon from "@/components/ui/SkillIcon";
+import { Reveal } from "@/components/motion/Reveal";
+
+const CATEGORY_ORDER: SkillCategory[] = [
+  "Languages",
+  "Frameworks & Libraries",
+  "Databases & BaaS",
+  "Tools & Platforms",
+];
 
 export default function Skills() {
-  return (
-    <section id="skills" className="section-padding relative">
-      <div className="max-w-6xl mx-auto">
-        <SectionHeading title="Skills" />
+  const groups = CATEGORY_ORDER.map((category) => ({
+    category,
+    items: skills.filter((s) => s.category === category),
+  })).filter((g) => g.items.length > 0);
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-          {skills.map((skill, index) => (
-            <motion.div
-              key={skill.name}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: index * 0.03 }}
-              className="card card-hover p-4 flex items-center gap-3"
+  return (
+    <section id="skills" aria-labelledby="skills-title" className="section">
+      <div className="container-page">
+        <SectionHeader id="skills" label="Skills" title="Tools of" emphasis="the craft." />
+
+        <div className="border-t border-line">
+          {groups.map((group, gi) => (
+            <Reveal
+              key={group.category}
+              delay={gi * 0.06}
+              className="grid gap-5 border-b border-line py-8 md:grid-cols-12 md:gap-6 md:py-10"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={skill.icon}
-                alt={skill.name}
-                className="w-7 h-7 object-contain"
-                loading="lazy"
-              />
-              <span className="text-sm text-neutral-300">{skill.name}</span>
-            </motion.div>
+              <h3 className="eyebrow flex items-center gap-3 md:col-span-3 md:pt-3">
+                {group.category}
+                <span className="text-accent">{String(group.items.length).padStart(2, "0")}</span>
+              </h3>
+              <ul className="flex flex-wrap gap-2 md:col-span-9 md:gap-2.5">
+                {group.items.map((skill) => (
+                  <SkillChip key={skill.name} skill={skill} />
+                ))}
+              </ul>
+            </Reveal>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function SkillChip({ skill }: { skill: Skill }) {
+  return (
+    <li
+      className="group inline-flex items-center gap-2.5 rounded-full border border-line bg-surface py-1.5 pr-4 pl-1.5 transition-[border-color,transform,box-shadow] duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-line-strong hover:shadow-sm"
+      style={{ "--brand": skill.color ?? "var(--fg)" } as React.CSSProperties}
+    >
+      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-muted text-fg-muted transition-[color,transform] duration-500 group-hover:-rotate-12 group-hover:text-[var(--brand)]">
+        <SkillIcon icon={skill.icon} className="h-4 w-4" />
+      </span>
+      <span className="text-[15px] text-fg">{skill.name}</span>
+    </li>
   );
 }

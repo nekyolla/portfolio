@@ -14,7 +14,7 @@ The system uses a dual-database architecture: PostgreSQL handles relational data
 Authentication is handled via JWT with a custom RBAC middleware that checks permissions on every endpoint. The achievement workflow follows a draft → submitted → verified/rejected lifecycle, with each state transition triggering notifications to relevant parties.
 
 Key technical achievements include designing a hybrid PostgreSQL + MongoDB architecture that balances relational integrity with document flexibility, implementing a fine-grained RBAC system with 6+ permissions, and building a dynamic schema for achievement details that adapts per category without schema migrations.`,
-    thumbnail: "/images/projects/skp.png",
+    thumbnail: "/images/projects/skp.webp",
     techStack: ["Go", "Fiber", "PostgreSQL", "MongoDB", "JWT", "Swagger", "REST API"],
     githubUrl: "https://github.com/nekyolla/sistem-kredit-prestasi",
     liveUrl: "",
@@ -43,7 +43,7 @@ The backend is powered by Google Apps Script (GAS) with Google Sheets as the sto
 The system follows a strict cross-group compatibility contract — any client from other groups can connect to this server and vice versa, enabling swap testing as part of the course assessment.
 
 Key technical achievements include implementing a stateless token-based QR attendance system with expiry validation, building a batch accelerometer ingestion pipeline, and rendering GPS history as polylines on an interactive map.`,
-    thumbnail: "/images/projects/cloudtrack.png",
+    thumbnail: "/images/projects/cloudtrack.webp",
     techStack: ["Google Apps Script", "Google Sheets", "TypeScript", "Next.js", "Vercel", "REST API", "Postman"],
     githubUrl: "https://github.com/nekyolla/TuCil-Cloud-Computing-Kel-4",
     liveUrl: "https://cloudk4.vercel.app",
@@ -72,7 +72,7 @@ Users can upload their own CSV transaction dataset or use the built-in dummy dat
 The application includes an automated business insight section that highlights the best rule by confidence and the highest lift rule, along with actionable cross-selling recommendations such as product placement strategies and bundle discount suggestions.
 
 Key technical achievements include building a full ARM pipeline from raw CSV parsing to one-hot encoding, frequent itemset mining, and rule generation — all within a single-file Streamlit app with no backend required.`,
-    thumbnail: "/images/projects/arm.png",
+    thumbnail: "/images/projects/arm.webp",
     techStack: ["Python", "Streamlit", "Pandas", "mlxtend"],
     githubUrl: "https://github.com/nekyolla/apriori",
     liveUrl: "",
@@ -103,7 +103,7 @@ Navigation is powered by OSRM (Open Source Routing Machine) — a free, open-sou
 The admin side features secure Supabase Auth login, full CRUD management of workshop data, and a visual map picker that lets admins set coordinates by dragging a marker on an interactive map instead of manually entering lat/lng values.
 
 Backend security follows OWASP Top 10 API Security standards with strict input validation, centralized error handling, and standardized JSON response formatting.`,
-    thumbnail: "/images/projects/bengkel.jpg",
+    thumbnail: "/images/projects/bengkel.webp",
     techStack: [
       "React Native",
       "Expo",
@@ -132,32 +132,32 @@ Backend security follows OWASP Top 10 API Security standards with strict input v
     ],
   },
   {
-  id: "6",
-  slug: "nekyolla-portfolio",
-  title: "Nekyolla Portfolio",
-  shortDesc:
-    "A modern, data-driven personal portfolio built with Next.js 16, featuring dynamic project pages, certificate modals, and smooth scroll animations.",
-  fullDesc: `This personal portfolio website showcases my profile, education, organizational experience, skills, projects, and certificates in a single modern, dark-themed interface.
+    id: "5",
+    slug: "nekyolla-portfolio",
+    title: "Nekyolla Portfolio",
+    shortDesc:
+      "A modern, data-driven personal portfolio built with Next.js 16, featuring an editorial serif design, light/dark themes, dynamic project pages, and smooth scroll animations.",
+    fullDesc: `This personal portfolio website showcases my profile, education, organizational experience, skills, projects, and certificates in a single, editorial-style interface.
 
 The site follows a fully data-driven architecture — all content (projects, education, organizations, skills, certificates, and gallery) lives in separate TypeScript data files, allowing content updates without touching any UI components. Each project automatically generates its own detail page via Static Site Generation based on its slug.
 
-The design follows a professional dark mode aesthetic (pure black, white, and neutral gray), inspired by minimalist developer portfolios. Certificate entries open in a LinkedIn-style modal with embedded PDF preview and download functionality.
+The design pairs a warm serif display typeface with a clean sans-serif, on a paper-like ivory palette with a matching charcoal dark mode. Motion is deliberately calm: smooth inertial scrolling, masked text reveals, and soft blur-fade transitions — all of which switch off automatically for visitors who prefer reduced motion.
 
-Key technical achievements include building a fully type-safe data layer with TypeScript interfaces, implementing dynamic SSG routes for project details, and integrating Framer Motion for scroll-based reveal animations across all sections.`,
-  thumbnail: "/images/projects/portfolio.png",
-  techStack: ["Next.js", "TypeScript", "TailwindCSS", "Framer Motion", "Vercel"],
-  githubUrl: "https://github.com/xdante68/portfolio",
-  liveUrl: "https://nekyollas-portfolio.vercel.app/",
-  period: "2026",
-  teamSize: 1,
-  role: "Developer",
-  highlights: [
-    "Fully data-driven architecture — edit TypeScript data files, no component changes needed",
-    "Dynamic SSG project detail pages via dynamic routing ([slug])",
-    "LinkedIn-style certificate modal with embedded PDF preview and download",
-    "Professional dark mode design (pure black + neutral gray)",
-    "Smooth scroll-reveal animations powered by Framer Motion",
-    "Fully responsive, mobile-first layout with SEO-optimized static pages",
-  ],
-},
+Key technical achievements include a fully type-safe data layer, mostly server-rendered components to keep the JavaScript bundle small, self-hosted fonts and icons with no third-party requests, an accessible dialog with focus management, and optimized, metadata-stripped images.`,
+    thumbnail: "/images/projects/portfolio.webp",
+    techStack: ["Next.js", "TypeScript", "TailwindCSS", "Framer Motion", "Lenis", "Vercel"],
+    githubUrl: "https://github.com/nekyolla/portfolio",
+    liveUrl: "https://nekyollas-portfolio.vercel.app/",
+    period: "2026",
+    teamSize: 1,
+    role: "Developer",
+    highlights: [
+      "Fully data-driven architecture — edit TypeScript data files, no component changes needed",
+      "Dynamic SSG project detail pages with generated Open Graph images",
+      "Editorial design system: serif display type, warm light and dark themes",
+      "Smooth scrolling (Lenis) and reveal animations (Framer Motion) that respect reduced-motion settings",
+      "Accessible by default: skip link, keyboard-friendly dialogs, visible focus, WCAG AA contrast",
+      "Self-hosted fonts and icons, optimized images, and security headers",
+    ],
+  },
 ];
