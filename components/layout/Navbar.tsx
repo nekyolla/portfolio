@@ -1,144 +1,266 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { ArrowDownToLine, ArrowUpRight } from "lucide-react";
+import { useLenis } from "lenis/react";
 import { profile } from "@/data/profile";
+import { sections } from "@/lib/sections";
+import { useFocusTrap, useScrollLock } from "@/lib/hooks";
+import { cn, padIndex } from "@/lib/utils";
+import ThemeToggle from "./ThemeToggle";
 
-const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#education", label: "Education" },
-  { href: "#organization", label: "Organization" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#certificates", label: "Certificates" },
-  { href: "#gallery", label: "Gallery" },
-];
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+function useActiveSection(enabled: boolean) {
+  const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Intersection Observer for active section
-  useEffect(() => {
+    if (!enabled) return;
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        }
       },
-      { rootMargin: "-40% 0px -60% 0px" }
+      // A thin band across the middle of the viewport decides which section is "current"
+      { rootMargin: "-45% 0px -54% 0px" }
     );
-
-    const sections = document.querySelectorAll("section[id]");
-    sections.forEach((s) => observer.observe(s));
+    document.querySelectorAll("main section[id]").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [enabled]);
 
-  const handleNavClick = (href: string) => {
-    setIsMobileOpen(false);
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+  return enabled ? active : null;
+}
+
+export default function Navbar() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const lenis = useLenis();
+  const active = useActiveSection(isHome);
+
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pendingTarget = useRef<string | null>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, "change", (y) => {
+    const prev = scrollY.getPrevious() ?? 0;
+    setScrolled(y > 16);
+    // Hide while reading downwards, reveal as soon as the visitor scrolls up
+    if (y > 320 && y > prev + 6) setHidden(true);
+    else if (y < prev - 6 || y <= 320) setHidden(false);
+  });
+
+  const closeMenu = () => setMenuOpen(false);
+  useScrollLock(menuOpen);
+  useFocusTrap(menuRef, menuOpen, closeMenu);
+
+  const hrefFor = (id: string) => (isHome ? `#${id}` : `/#${id}`);
+
+  const scrollToPending = () => {
+    const id = pendingTarget.current;
+    pendingTarget.current = null;
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (lenis) lenis.scrollTo(el, { force: true });
+    else el.scrollIntoView();
+    history.replaceState(null, "", `#${id}`);
   };
+
+  const NavAnchor = isHome ? "a" : Link;
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "nav-blur border-b border-neutral-800/50" : "bg-transparent"
-        }`}
+      <motion.header
+        initial={false}
+        animate={{ y: hidden && !menuOpen ? "-110%" : "0%" }}
+        transition={{ duration: 0.6, ease: EASE }}
+        onFocusCapture={() => setHidden(false)}
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500",
+          scrolled
+            ? "border-b border-line/70 bg-bg/75 backdrop-blur-xl backdrop-saturate-150"
+            : "border-b border-transparent"
+        )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo / Name */}
-            <a
-              href="#home"
-              onClick={(e) => { e.preventDefault(); handleNavClick("#home"); }}
-              className="text-lg font-bold text-white"
-            >
-              {profile.nickname}<span className="text-neutral-500">.</span>
+        <div className="container-page flex h-16 items-center justify-between gap-6 md:h-[4.5rem]">
+          {isHome ? (
+            <a href="#home" className="font-serif text-xl tracking-tight text-fg">
+              {profile.nickname}
+              <span className="text-accent">.</span>
             </a>
+          ) : (
+            <Link href="/" className="font-serif text-xl tracking-tight text-fg">
+              {profile.nickname}
+              <span className="text-accent">.</span>
+            </Link>
+          )}
 
-            {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                  className={`relative px-3 py-2 text-sm transition-colors duration-300 ${
-                    activeSection === link.href.slice(1)
-                      ? "text-white"
-                      : "text-neutral-500 hover:text-neutral-300"
-                  }`}
-                >
-                  {link.label}
-                  {activeSection === link.href.slice(1) && (
-                    <motion.div
-                      layoutId="navIndicator"
-                      className="absolute bottom-0 left-3 right-3 h-px bg-white rounded-full"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                    />
-                  )}
-                </a>
-              ))}
-            </div>
+          <nav aria-label="Primary" className="hidden lg:block">
+            <ul className="flex items-center gap-0.5">
+              {sections.map((s) => {
+                const isActive = active === s.id;
+                return (
+                  <li key={s.id}>
+                    <NavAnchor
+                      href={hrefFor(s.id)}
+                      aria-current={isActive ? "true" : undefined}
+                      className={cn(
+                        "relative block px-3 py-2 text-[13px] tracking-wide transition-colors duration-300",
+                        isActive ? "text-fg" : "text-fg-subtle hover:text-fg"
+                      )}
+                    >
+                      {s.label}
+                      {isActive && (
+                        <motion.span
+                          layoutId="nav-indicator"
+                          className="absolute inset-x-3 -bottom-px h-px bg-fg"
+                          transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
+                        />
+                      )}
+                    </NavAnchor>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
-            {/* Mobile toggle */}
-            <button
-              onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-white/5 transition-colors"
-              aria-label="Toggle menu"
+          <div className="flex items-center gap-1">
+            <ThemeToggle />
+            <a
+              href={profile.cvFile}
+              download={`${profile.name.replace(/\s+/g, "-")}-CV.pdf`}
+              className="btn btn-ghost ml-2 hidden min-h-0 py-2 text-[13px] sm:inline-flex"
             >
-              {isMobileOpen ? <X size={22} /> : <Menu size={22} />}
+              Résumé
+              <ArrowDownToLine size={14} strokeWidth={1.75} aria-hidden />
+            </a>
+            <button
+              type="button"
+              onClick={() => setMenuOpen(true)}
+              className="ml-1 inline-flex h-11 items-center gap-2 rounded-full px-3 text-[13px] text-fg lg:hidden"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+            >
+              <span className="flex w-5 flex-col gap-[5px]" aria-hidden>
+                <span className="h-px w-full bg-current" />
+                <span className="h-px w-3/4 bg-current" />
+              </span>
+              Menu
             </button>
           </div>
         </div>
-      </motion.nav>
+      </motion.header>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {isMobileOpen && (
+      <AnimatePresence onExitComplete={scrollToPending}>
+        {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed top-16 left-0 right-0 z-40 nav-blur border-b border-neutral-800/50 lg:hidden"
+            ref={menuRef}
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site navigation"
+            initial={{ clipPath: "inset(0 0 100% 0)" }}
+            animate={{ clipPath: "inset(0 0 0% 0)" }}
+            exit={{ clipPath: "inset(0 0 100% 0)" }}
+            transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+            className="fixed inset-0 z-[60] flex flex-col bg-bg lg:hidden"
+            data-lenis-prevent
           >
-            <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                  className={`px-4 py-3 rounded-lg text-sm transition-colors ${
-                    activeSection === link.href.slice(1)
-                      ? "text-white bg-white/5"
-                      : "text-neutral-500 hover:text-neutral-300 hover:bg-white/5"
-                  }`}
+            <div className="container-page flex h-16 shrink-0 items-center justify-between">
+              <span className="font-serif text-xl tracking-tight">
+                {profile.nickname}
+                <span className="text-accent">.</span>
+              </span>
+              <div className="flex items-center gap-1">
+                <ThemeToggle />
+                <button
+                  type="button"
+                  onClick={closeMenu}
+                  className="inline-flex h-11 items-center gap-2 rounded-full px-3 text-[13px]"
                 >
-                  {link.label}
-                </a>
-              ))}
+                  <span className="relative block h-3 w-4" aria-hidden>
+                    <span className="absolute top-1/2 h-px w-full rotate-45 bg-current" />
+                    <span className="absolute top-1/2 h-px w-full -rotate-45 bg-current" />
+                  </span>
+                  Close
+                </button>
+              </div>
             </div>
+
+            <nav aria-label="Mobile" className="container-page flex-1 overflow-y-auto py-8">
+              <ul className="flex flex-col">
+                {sections.map((s, i) => (
+                  <motion.li
+                    key={s.id}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.6, delay: 0.25 + i * 0.05, ease: EASE }}
+                    className="border-b border-line"
+                  >
+                    <NavAnchor
+                      href={hrefFor(s.id)}
+                      onClick={(e: React.MouseEvent) => {
+                        if (isHome) {
+                          e.preventDefault();
+                          pendingTarget.current = s.id;
+                        }
+                        closeMenu();
+                      }}
+                      aria-current={active === s.id ? "true" : undefined}
+                      className="group flex items-baseline gap-4 py-4"
+                    >
+                      <span className="eyebrow w-6">{padIndex(i)}</span>
+                      <span
+                        className={cn(
+                          "font-serif text-4xl tracking-tight transition-colors duration-300 sm:text-5xl",
+                          active === s.id ? "text-accent" : "text-fg group-hover:text-accent"
+                        )}
+                      >
+                        {s.label}
+                      </span>
+                    </NavAnchor>
+                  </motion.li>
+                ))}
+              </ul>
+            </nav>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { delay: 0.6 } }}
+              exit={{ opacity: 0 }}
+              className="container-page flex shrink-0 flex-wrap items-center justify-between gap-4 border-t border-line py-6 text-sm"
+            >
+              <a href={`mailto:${profile.email}`} className="link-underline text-fg-muted">
+                {profile.email}
+              </a>
+              <div className="flex gap-5 text-fg-muted">
+                {[
+                  { href: profile.github, label: "GitHub" },
+                  { href: profile.linkedin, label: "LinkedIn" },
+                  { href: profile.instagram, label: "Instagram" },
+                ].map((l) => (
+                  <a
+                    key={l.label}
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 hover:text-fg"
+                  >
+                    {l.label}
+                    <ArrowUpRight size={14} aria-hidden />
+                    <span className="sr-only">(opens in a new tab)</span>
+                  </a>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

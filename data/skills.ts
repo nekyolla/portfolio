@@ -1,99 +1,35 @@
 import { Skill } from "@/types";
 
+// `icon` is a key from components/ui/SkillIcon.tsx (icons are bundled — no CDN requests).
+// `color` is the brand color shown on hover; leave it out for black/white logos.
 export const skills: Skill[] = [
   // Languages
-  {
-    name: "Go",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg",
-  },
-  {
-    name: "TypeScript",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-  },
-  {
-    name: "JavaScript",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-  },
-  {
-    name: "Python",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-  },
+  { name: "Go", icon: "go", category: "Languages", color: "#00ADD8" },
+  { name: "TypeScript", icon: "typescript", category: "Languages", color: "#3178C6" },
+  { name: "JavaScript", icon: "javascript", category: "Languages", color: "#E8C400" },
+  { name: "Python", icon: "python", category: "Languages", color: "#3776AB" },
 
   // Frameworks & Libraries
-  {
-    name: "Next.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-  },
-  {
-    name: "React Native",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-  },
-  {
-    name: "Node.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-  },
-  {
-    name: "Express.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
-  },
-  {
-    name: "TailwindCSS",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-  },
-  {
-    name: "Streamlit",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/streamlit/streamlit-original.svg",
-  },
-  {
-    name: "TensorFlow",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg",
-  },
-  {
-    name: "PyTorch",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg",
-  },
-  {
-    name: "OpenCV",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg",
-  },
-  {
-    name: "HuggingFace",
-    icon: "https://huggingface.co/front/assets/huggingface_logo-noborder.svg",
-  },
+  { name: "Next.js", icon: "nextjs", category: "Frameworks & Libraries" },
+  { name: "React Native", icon: "react", category: "Frameworks & Libraries", color: "#149ECA" },
+  { name: "Node.js", icon: "nodejs", category: "Frameworks & Libraries", color: "#5FA04E" },
+  { name: "Express.js", icon: "express", category: "Frameworks & Libraries" },
+  { name: "TailwindCSS", icon: "tailwindcss", category: "Frameworks & Libraries", color: "#06B6D4" },
+  { name: "Streamlit", icon: "streamlit", category: "Frameworks & Libraries", color: "#FF4B4B" },
+  { name: "TensorFlow", icon: "tensorflow", category: "Frameworks & Libraries", color: "#FF6F00" },
+  { name: "PyTorch", icon: "pytorch", category: "Frameworks & Libraries", color: "#EE4C2C" },
+  { name: "OpenCV", icon: "opencv", category: "Frameworks & Libraries", color: "#5C3EE8" },
+  { name: "HuggingFace", icon: "huggingface", category: "Frameworks & Libraries", color: "#E8B500" },
 
   // Databases & BaaS
-  {
-    name: "PostgreSQL",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-  },
-  {
-    name: "MongoDB",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-  },
-  {
-    name: "Supabase",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg",
-  },
+  { name: "PostgreSQL", icon: "postgresql", category: "Databases & BaaS", color: "#4169E1" },
+  { name: "MongoDB", icon: "mongodb", category: "Databases & BaaS", color: "#47A248" },
+  { name: "Supabase", icon: "supabase", category: "Databases & BaaS", color: "#3ECF8E" },
 
   // Tools & Platforms
-  {
-    name: "Git",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-  },
-  {
-    name: "Vercel",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",
-  },
-  {
-    name: "Postman",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
-  },
-  {
-    name: "Swagger",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swagger/swagger-original.svg",
-  },
-  {
-    name: "Figma",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-  },
+  { name: "Git", icon: "git", category: "Tools & Platforms", color: "#F05032" },
+  { name: "Vercel", icon: "vercel", category: "Tools & Platforms" },
+  { name: "Postman", icon: "postman", category: "Tools & Platforms", color: "#FF6C37" },
+  { name: "Swagger", icon: "swagger", category: "Tools & Platforms", color: "#6BA539" },
+  { name: "Figma", icon: "figma", category: "Tools & Platforms", color: "#F24E1E" },
 ];

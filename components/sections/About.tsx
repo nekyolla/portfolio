@@ -1,71 +1,65 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
 import { educations } from "@/data/education";
-import SectionHeading from "@/components/ui/SectionHeading";
+import SectionHeader from "@/components/ui/SectionHeader";
+import CopyButton from "@/components/ui/CopyButton";
+import { Reveal } from "@/components/motion/Reveal";
 
 export default function About() {
-  return (
-    <section id="about" className="section-padding relative">
-      <div className="max-w-6xl mx-auto">
-        <SectionHeading title="About Me" />
+  const [lead, ...rest] = profile.aboutMe.split("\n\n");
+  const gpa = educations[0]?.gpa;
 
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Text content */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="text-neutral-400 leading-relaxed space-y-4 text-justify">
-              {profile.aboutMe.split("\n\n").map((paragraph, i) => (
-                <p key={i}>{paragraph}</p>
+  const details = [
+    { label: "Location", value: profile.location },
+    { label: "University", value: profile.university },
+    { label: "Program", value: profile.program },
+    ...(gpa ? [{ label: "GPA", value: gpa }] : []),
+    { label: "Interests", value: profile.interests },
+  ];
+
+  return (
+    <section id="about" aria-labelledby="about-title" className="section">
+      <div className="container-page">
+        <SectionHeader id="about" label="About" title="Curious by nature," emphasis="building with purpose." />
+
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-9 md:col-start-4">
+            <Reveal>
+              <p className="font-serif text-2xl leading-[1.4] text-fg md:text-[2.1rem] md:leading-[1.35]">
+                {lead}
+              </p>
+            </Reveal>
+
+            <div className="mt-10 grid gap-6 text-base leading-relaxed text-fg-muted md:grid-cols-2 md:gap-10">
+              {rest.map((paragraph, i) => (
+                <Reveal key={i} delay={0.1 * (i + 1)}>
+                  <p>{paragraph}</p>
+                </Reveal>
               ))}
             </div>
-          </motion.div>
 
-          {/* Personal Details card */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            <div className="card p-6">
-              <h3 className="text-base font-semibold text-white mb-6">Personal Details</h3>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center py-2 border-b border-neutral-800/50">
-                  <span className="text-sm text-neutral-500">Location</span>
-                  <span className="text-sm text-white">{profile.location}</span>
-                </div>
-                <div className="flex justify-between items-center py-2 border-b border-neutral-800/50">
-                  <span className="text-sm text-neutral-500">University</span>
-                  <span className="text-sm text-white">{profile.university}</span>
-                </div>
-                {educations[0]?.gpa && (
-                  <div className="flex justify-between items-center py-2 border-b border-neutral-800/50">
-                    <span className="text-sm text-neutral-500">GPA</span>
-                    <span className="text-sm text-white">{educations[0].gpa}</span>
-                  </div>
-                )}
-                <div className="flex justify-between items-center py-2 border-b border-neutral-800/50">
-                  <span className="text-sm text-neutral-500">Interests</span>
-                  <span className="text-sm text-white">Data Science, Machine Learning & AI</span>
-                </div>
-                <div className="flex justify-between items-center py-2">
-                  <span className="text-sm text-neutral-500">Email</span>
-                  <a
-                    href={`mailto:${profile.email}`}
-                    className="text-sm text-white hover:text-neutral-300 transition-colors"
+            <Reveal delay={0.2}>
+              <dl className="mt-14 grid border-t border-line sm:grid-cols-2">
+                {details.map((d) => (
+                  <div
+                    key={d.label}
+                    className="flex flex-col gap-1 border-b border-line py-4 sm:pr-6 sm:odd:border-r sm:even:pl-6"
                   >
-                    {profile.email}
-                  </a>
+                    <dt className="eyebrow">{d.label}</dt>
+                    <dd className="text-[15px] text-fg">{d.value}</dd>
+                  </div>
+                ))}
+                <div className="flex flex-col gap-1 border-b border-line py-4 sm:pr-6 sm:odd:border-r sm:even:pl-6">
+                  <dt className="eyebrow">Email</dt>
+                  <dd className="-my-2 flex min-w-0 items-center gap-1 text-[15px]">
+                    <a href={`mailto:${profile.email}`} className="link-underline truncate text-fg">
+                      {profile.email}
+                    </a>
+                    <CopyButton value={profile.email} label="Copy email address" className="h-9 w-9 shrink-0" />
+                  </dd>
                 </div>
-              </div>
-            </div>
-          </motion.div>
+              </dl>
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>

@@ -3,7 +3,7 @@ import { Education } from "@/types";
 export const educations: Education[] = [
   {
     id: "1",
-    institution: "Airlangga University",
+    institution: "Universitas Airlangga",
     degree: "Bachelor of Applied Science (D4)",
     major: "Informatics Engineering",
     period: "2023 - Now",
