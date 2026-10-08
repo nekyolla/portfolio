@@ -8,7 +8,7 @@ import Certificates from "@/components/sections/Certificates";
 import Gallery from "@/components/sections/Gallery";
 import Contact from "@/components/sections/Contact";
 import Marquee from "@/components/ui/Marquee";
-import { profile } from "@/data/profile";
+import { profile, siteDescription } from "@/data/profile";
 import { educations } from "@/data/education";
 
 // Structured data so search engines can show a proper profile card
@@ -20,7 +20,7 @@ const personJsonLd = {
   url: profile.siteUrl,
   image: new URL(profile.profileImage, profile.siteUrl).toString(),
   jobTitle: profile.title,
-  description: profile.bio,
+  description: siteDescription,
   address: { "@type": "PostalAddress", addressLocality: profile.location },
   alumniOf: educations.map((e) => ({ "@type": "EducationalOrganization", name: e.institution })),
   knowsAbout: profile.focusAreas,

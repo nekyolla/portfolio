@@ -7,7 +7,7 @@ import Footer from "@/components/layout/Footer";
 import BackToTop from "@/components/ui/BackToTop";
 import Providers from "@/components/providers/Providers";
 import { themeInitScript } from "@/components/providers/theme";
-import { profile } from "@/data/profile";
+import { profile, siteDescription } from "@/data/profile";
 
 // Fonts are downloaded at build time and self-hosted — visitors never hit Google's servers.
 const newsreader = Newsreader({
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     default: title,
     template: `%s — ${profile.nickname}`,
   },
-  description: profile.bio,
+  description: siteDescription,
   applicationName: `${profile.nickname} Portfolio`,
   keywords: [
     profile.name,
@@ -59,13 +59,13 @@ export const metadata: Metadata = {
     url: "/",
     siteName: `${profile.nickname} Portfolio`,
     title,
-    description: profile.bio,
+    description: siteDescription,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title,
-    description: profile.bio,
+    description: siteDescription,
   },
   formatDetection: { email: false, telephone: false, address: false },
 };
