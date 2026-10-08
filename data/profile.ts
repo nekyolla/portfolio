@@ -32,18 +32,6 @@ My long-term vision is simple: stay curious, keep learning, and turn that knowle
   cvFile: "/cv/cv.pdf",
   location: "Surabaya, East Java, Indonesia",
   siteUrl: "https://nekyollas-portfolio.vercel.app",
-  // Composed from the SKP project: the endpoint is in its Swagger docs, the role and status
-  // transition come from its highlights. It is not captured output, hence `illustrative`.
-  heroSnippet: {
-    source: "SKP API",
-    projectSlug: "skp",
-    request: { method: "POST", path: "/achievements/{id}/verify" },
-    rows: [
-      { key: "role", value: "advisor" },
-      { key: "status", value: "submitted → verified", highlight: true },
-    ],
-    illustrative: true,
-  },
 };
 
 // The hero bio is written in first person; search results and link previews also need to say who this is.
