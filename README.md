@@ -31,12 +31,13 @@ Website portfolio pribadi yang dibangun dengan Next.js 16, menampilkan profil, p
 
 | Section | Deskripsi |
 |---|---|
-| **Hero** | Nama besar (serif), bio, roles, tombol Download CV + Get in touch, social links, foto berbentuk arch |
+| **Hero** | Nama besar (serif), bio, roles, tombol Download CV + Get in touch, social links, foto berbentuk arch dengan kartu cuplikan hasil project (berlabel *Illustrative*) |
 | **About** | Bio panjang + detail (lokasi, kampus, program, GPA, minat, email + tombol copy) |
 | **Education** | Daftar pendidikan dengan GPA / nilai akhir |
 | **Organizations** | Riwayat organisasi; highlight bisa dibuka-tutup (accordion) |
 | **Skills** | Dikelompokkan per kategori (Languages, Frameworks, Databases, Tools) |
-| **Projects** | Project unggulan + grid; seluruh kartu bisa diklik, ada halaman detail per project (`/projects/[slug]`) dengan navigasi prev/next |
+| **Process** | Cara kerja dalam 4 langkah + angka (count-up) yang diambil dari data project |
+| **Projects** | Project unggulan + grid dengan baris *impact* (bukti singkat); seluruh kartu bisa diklik, ada halaman detail per project (`/projects/[slug]`) dengan navigasi prev/next |
 | **Certificates** | Grid preview sertifikat + filter per penerbit; dialog dengan preview, verifikasi, buka PDF, dan download |
 | **Gallery** | Foto kegiatan + lightbox — otomatis muncul begitu `data/gallery.ts` berisi foto |
 | **Contact** | Ajakan kontak, email (dengan tombol copy), social links, CV |
@@ -49,11 +50,12 @@ Semua konten ada di `data/*.ts` — tidak perlu menyentuh komponen.
 
 | File | Isi |
 |---|---|
-| `data/profile.ts` | Nama, bio, roles, focus areas (marquee), tagline footer, link sosial, URL situs |
+| `data/profile.ts` | Nama, bio, roles, focus areas (marquee), tagline footer, link sosial, URL situs, `heroSnippet` (kartu di foto hero; set `illustrative: true` kalau bukan output asli) |
 | `data/education.ts` | Riwayat pendidikan |
 | `data/organizations.ts` | Organisasi. Prestasi berformat `"1st Place - Nama Lomba"` otomatis tampil sebagai badge |
 | `data/skills.ts` | Skill: `icon` = key dari `components/ui/SkillIcon.tsx`, `category`, `color` (warna brand saat hover) |
-| `data/projects.ts` | Project; project pertama tampil sebagai *featured* |
+| `data/projects.ts` | Project; project pertama tampil sebagai *featured*. `impact` = satu baris bukti (angka/hasil) yang tampil di kartu dan halaman detail |
+| `data/process.ts` | Langkah "How I work" dan angka statistiknya — angka harus sama dengan yang ada di `data/projects.ts` |
 | `data/certificates.ts` | Sertifikat; `date` berformat `"Month YYYY"` (dipakai untuk urutan terbaru) |
 | `data/gallery.ts` | Foto kegiatan (section disembunyikan selama kosong) |
 

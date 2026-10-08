@@ -7,6 +7,7 @@ export const projects: Project[] = [
     title: "Student Achievement Credit System (SKP)",
     shortDesc:
       "A REST API backend for reporting and verifying student achievements with role-based access control, built with Go and Fiber using dual-database architecture.",
+    impact: "20+ endpoints · 3 roles · draft\u00a0→\u00a0verified workflow",
     fullDesc: `The Student Achievement Credit System (SKP) is a backend REST API built for Universitas Airlangga's Informatics Engineering program. It enables students to report their academic and non-academic achievements, advisors to verify them, and admins to manage the entire system.
 
 The system uses a dual-database architecture: PostgreSQL handles relational data and RBAC (roles, permissions, users, students, lecturers), while MongoDB stores dynamic achievement data with flexible fields per achievement type — competitions, publications, organizations, certifications, and more.
@@ -36,6 +37,7 @@ Key technical achievements include designing a hybrid PostgreSQL + MongoDB archi
     title: "CloudTrack",
     shortDesc:
       "A cloud-based IoT telemetry and attendance platform supporting QR-based check-in, accelerometer batch streaming, and real-time GPS tracking with map visualization.",
+    impact: "QR attendance + accelerometer + GPS in one API",
     fullDesc: `CloudTrack is a cloud-based platform built for Universitas Airlangga's Cloud Computing practicum. It integrates three core modules — dynamic QR attendance, accelerometer telemetry, and GPS tracking — into a single unified API following the API Contract Simple v1 standard.
 
 The backend is powered by Google Apps Script (GAS) with Google Sheets as the storage layer, handling four data sheets: tokens, presence, accel, and gps. The web client is built with TypeScript and deployed on Vercel, providing an interface for QR scanning, sensor data streaming, and live map visualization using marker and polyline rendering.
@@ -65,6 +67,7 @@ Key technical achievements include implementing a stateless token-based QR atten
     title: "Apriori — Market Basket Analysis",
     shortDesc:
       "An interactive web application for discovering frequently co-purchased item patterns using the Apriori algorithm and Association Rule Mining.",
+    impact: "CSV → association rules, no backend",
     fullDesc: `Apriori Market Basket Analysis is a Streamlit-based web application that implements the Apriori algorithm to extract association rules from retail transaction data.
 
 Users can upload their own CSV transaction dataset or use the built-in dummy data. Min Support and Min Confidence parameters are fully adjustable via interactive sidebar sliders, with results rendered instantly as frequent itemsets and association rules tables.
@@ -94,6 +97,7 @@ Key technical achievements include building a full ARM pipeline from raw CSV par
     title: "Bengkel Brainrot — Campus Workshop Directory",
     shortDesc:
       "A map-based directory app for finding nearby workshops around Universitas Airlangga, featuring real-time GPS, turn-by-turn navigation, and a full admin CRUD panel.",
+    impact: "66 locations · turn-by-turn navigation in Bahasa Indonesia",
     fullDesc: `Bengkel Brainrot is a cloud-native mobile directory application built for the Cloud Computing final project at Universitas Airlangga. It helps students and campus residents quickly find nearby workshops (bengkel) with complete details, live distance calculation, and real-time navigation.
 
 The system follows a strict cloud-native architecture: a React Native (Expo) mobile app communicates exclusively through a Node.js + Express REST API deployed serverlessly on Vercel, which acts as a security gatekeeper before any interaction with Supabase (PostgreSQL). This prevents direct database access from the client entirely.
@@ -137,6 +141,7 @@ Backend security follows OWASP Top 10 API Security standards with strict input v
     title: "Nekyolla Portfolio",
     shortDesc:
       "A modern, data-driven personal portfolio built with Next.js 16, featuring an editorial serif design, light/dark themes, dynamic project pages, and smooth scroll animations.",
+    impact: "WCAG AA, 0 axe violations",
     fullDesc: `This personal portfolio website showcases my profile, education, organizational experience, skills, projects, and certificates in a single, editorial-style interface.
 
 The site follows a fully data-driven architecture — all content (projects, education, organizations, skills, certificates, and gallery) lives in separate TypeScript data files, allowing content updates without touching any UI components. Each project automatically generates its own detail page via Static Site Generation based on its slug.

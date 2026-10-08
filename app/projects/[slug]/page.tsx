@@ -86,6 +86,12 @@ export default async function ProjectPage({ params }: Params) {
             >
               {project.shortDesc}
             </p>
+            {project.impact && (
+              <p className="fade-up mt-5 font-mono text-xs tracking-wide text-accent md:text-sm" style={delay(400)}>
+                <span className="sr-only">Impact: </span>
+                {project.impact}
+              </p>
+            )}
           </div>
 
           <div className="fade-up flex flex-wrap items-end gap-3 lg:col-span-4 lg:justify-end" style={delay(450)}>

@@ -30,6 +30,19 @@ export interface Profile {
   location: string;
   /** Production URL, used for SEO metadata, sitemap and Open Graph */
   siteUrl: string;
+  /** Small "result" card pinned to the hero portrait (optional) */
+  heroSnippet?: HeroSnippet;
+}
+
+export interface HeroSnippet {
+  /** Where the snippet comes from, e.g. "SKP API" */
+  source: string;
+  /** Slug of the project the card links to */
+  projectSlug: string;
+  request: { method: string; path: string };
+  rows: { key: string; value: string; highlight?: boolean }[];
+  /** true when the snippet is a composed example rather than captured output — shows an "Illustrative" label */
+  illustrative: boolean;
 }
 
 export interface Education {
@@ -77,6 +90,21 @@ export interface Project {
   teamSize?: number;
   role?: string;
   highlights?: string[];
+  /** One-line, evidence-style summary shown on the card and detail page (e.g. "20+ endpoints · 3 roles") */
+  impact?: string;
+}
+
+export interface ProcessStep {
+  title: string;
+  body: string;
+}
+
+export interface ProcessStat {
+  value: number;
+  suffix?: string;
+  label: string;
+  /** Where the number comes from (project slug), so it can be checked against data/projects.ts */
+  source?: string;
 }
 
 export interface Certificate {
