@@ -2,6 +2,7 @@ import { ArrowDownToLine, ArrowRight } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import { profile } from "@/data/profile";
 import Portrait from "@/components/ui/Portrait";
+import ResultCard from "@/components/ui/ResultCard";
 
 const delay = (ms: number) => ({ "--d": ms }) as React.CSSProperties;
 
@@ -118,6 +119,7 @@ export default function Hero() {
                 <span>{country}</span>
               </>
             }
+            overlay={profile.heroSnippet && <ResultCard snippet={profile.heroSnippet} />}
           />
         </div>
       </div>
