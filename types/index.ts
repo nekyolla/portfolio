@@ -77,6 +77,8 @@ export interface Project {
   teamSize?: number;
   role?: string;
   highlights?: string[];
+  /** One-line, evidence-style summary shown on the card and detail page (e.g. "20+ endpoints · 3 roles") */
+  impact?: string;
 }
 
 export interface Certificate {

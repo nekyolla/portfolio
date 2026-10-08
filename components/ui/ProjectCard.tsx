@@ -68,6 +68,13 @@ export default function ProjectCard({ project, index, featured = false }: Projec
           {project.shortDesc}
         </p>
 
+        {project.impact && (
+          <p className="mt-4 font-mono text-xs tracking-wide text-accent">
+            <span className="sr-only">Impact: </span>
+            {project.impact}
+          </p>
+        )}
+
         <div className="mt-5 flex flex-wrap items-center gap-2">
           <ul className="flex flex-wrap gap-1.5" aria-label="Tech stack">
             {project.techStack.slice(0, featured ? 7 : 4).map((tech) => (
