@@ -7,7 +7,7 @@ export const projects: Project[] = [
     title: "Student Achievement Credit System (SKP)",
     shortDesc:
       "A REST API backend for reporting and verifying student achievements with role-based access control, built with Go and Fiber using dual-database architecture.",
-    impact: "20+ endpoints · 3 roles · draft → verified workflow",
+    impact: "20+ endpoints · 3 roles · draft\u00a0→\u00a0verified workflow",
     fullDesc: `The Student Achievement Credit System (SKP) is a backend REST API built for Universitas Airlangga's Informatics Engineering program. It enables students to report their academic and non-academic achievements, advisors to verify them, and admins to manage the entire system.
 
 The system uses a dual-database architecture: PostgreSQL handles relational data and RBAC (roles, permissions, users, students, lecturers), while MongoDB stores dynamic achievement data with flexible fields per achievement type — competitions, publications, organizations, certifications, and more.
