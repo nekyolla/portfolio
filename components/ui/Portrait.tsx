@@ -38,16 +38,16 @@ export default function Portrait({ src, alt, caption, overlay }: PortraitProps) 
           </motion.div>
         </div>
         {overlay && (
-          // Mobile: hangs below the arch over the rocks; sm+: sits on the lower-left. Either way it stays clear of the face.
+          // Phones: hangs below the arch so its top sits on the rocks; sm+: lower-left. Either way it stays clear of the face.
           <div
-            className="fade-up absolute -bottom-10 -left-3 z-10 sm:bottom-12 sm:-left-10 lg:bottom-6 lg:-left-6 xl:bottom-12 xl:-left-16"
+            className="fade-up absolute -bottom-24 -left-3 z-10 sm:bottom-12 sm:-left-10 lg:bottom-6 lg:-left-6 xl:bottom-12 xl:-left-16"
             style={{ "--d": 1100 } as React.CSSProperties}
           >
             {overlay}
           </div>
         )}
       </div>
-      <figcaption className={`eyebrow flex items-center justify-between ${overlay ? "mt-14 sm:mt-4" : "mt-4"}`}>
+      <figcaption className={`eyebrow flex items-center justify-between ${overlay ? "mt-28 sm:mt-4" : "mt-4"}`}>
         {caption}
       </figcaption>
     </figure>

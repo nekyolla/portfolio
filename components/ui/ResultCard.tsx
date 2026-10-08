@@ -9,11 +9,10 @@ export default function ResultCard({ snippet }: { snippet: HeroSnippet }) {
   if (!project) return null;
 
   return (
-    <Link
-      href={`/projects/${project.slug}`}
-      className="group block w-[236px] overflow-hidden rounded-xl border border-line bg-surface/90 font-mono text-[11px] leading-relaxed shadow-xl backdrop-blur-md transition-[transform,box-shadow] duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-1 hover:shadow-2xl sm:w-[260px]"
-    >
-      <span className="flex items-center justify-between gap-3 border-b border-line px-3.5 py-2 text-fg-subtle">
+    // Opaque surface: over the photo, any translucency drops the small text below 4.5:1.
+    // The focus ring lives on the card (with a bg-colored halo) so it stays visible over the photo.
+    <div className="group relative w-[236px] overflow-hidden rounded-xl border border-line bg-surface font-mono text-[11px] leading-relaxed shadow-xl transition-[transform,box-shadow] duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-1 hover:shadow-2xl has-[a:focus-visible]:shadow-[0_0_0_6px_var(--bg)] has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-accent sm:w-[260px]">
+      <p className="flex items-center justify-between gap-3 border-b border-line px-3.5 py-2 text-fg-subtle">
         <span className="flex items-center gap-2">
           <span aria-hidden className="flex gap-1">
             <span className="h-1.5 w-1.5 rounded-full bg-line-strong" />
@@ -23,34 +22,38 @@ export default function ResultCard({ snippet }: { snippet: HeroSnippet }) {
           {snippet.source}
         </span>
         {snippet.illustrative && <span className="tracking-wide uppercase">Illustrative</span>}
-      </span>
+      </p>
 
-      <span className="block px-3.5 pt-3 text-fg">
+      <p className="px-3.5 pt-3 text-fg">
         <span className="text-accent">{snippet.request.method}</span> {snippet.request.path}
-      </span>
+      </p>
 
-      <span className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 px-3.5 pt-2 pb-3">
+      <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 px-3.5 pt-2 pb-3">
         {snippet.rows.map((row) => (
-          <span key={row.key} className="contents">
-            <span className="text-fg-subtle">{row.key}</span>
-            <span className={row.highlight ? "inline-flex items-center gap-1 text-accent" : "text-fg"}>
+          <div key={row.key} className="contents">
+            <dt className="text-fg-subtle">{row.key}</dt>
+            <dd className={row.highlight ? "inline-flex items-center gap-1 text-accent" : "text-fg"}>
               {row.value}
               {row.highlight && <Check size={12} strokeWidth={2} aria-hidden />}
-            </span>
-          </span>
+            </dd>
+          </div>
         ))}
-      </span>
+      </dl>
 
-      <span className="flex items-center justify-between border-t border-line px-3.5 py-2 text-fg-muted transition-colors group-hover:text-fg">
-        <span>
+      <p className="flex items-center justify-between border-t border-line px-3.5 py-2 text-fg-muted transition-colors group-hover:text-fg">
+        {/* Stretched link: the whole card is clickable, but the link's name stays short */}
+        <Link
+          href={`/projects/${project.slug}`}
+          className="after:absolute after:inset-0 after:rounded-xl focus-visible:outline-none"
+        >
           View project<span className="sr-only">: {project.title}</span>
-        </span>
+        </Link>
         <ArrowUpRight
           size={13}
           aria-hidden
           className="transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
         />
-      </span>
-    </Link>
+      </p>
+    </div>
   );
 }
