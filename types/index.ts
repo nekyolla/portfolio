@@ -30,20 +30,8 @@ export interface Profile {
   location: string;
   /** Production URL, used for SEO metadata, sitemap and Open Graph */
   siteUrl: string;
-  /** Small "result" card pinned to the hero portrait (optional) */
-  heroSnippet?: HeroSnippet;
 }
 
-export interface HeroSnippet {
-  /** Where the snippet comes from, e.g. "SKP API" */
-  source: string;
-  /** Slug of the project the card links to */
-  projectSlug: string;
-  request: { method: string; path: string };
-  rows: { key: string; value: string; highlight?: boolean }[];
-  /** true when the snippet is a composed example rather than captured output — shows an "Illustrative" label */
-  illustrative: boolean;
-}
 
 export interface Education {
   id: string;

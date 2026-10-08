@@ -31,7 +31,7 @@ Website portfolio pribadi yang dibangun dengan Next.js 16, menampilkan profil, p
 
 | Section | Deskripsi |
 |---|---|
-| **Hero** | Nama besar (serif), bio, roles, tombol Download CV + Get in touch, social links, foto berbentuk arch dengan kartu cuplikan hasil project (berlabel *Illustrative*) |
+| **Hero** | Nama besar (serif), bio, roles, tombol Download CV + Get in touch, social links, foto berbentuk arch |
 | **About** | Bio panjang + detail (lokasi, kampus, program, GPA, minat, email + tombol copy) |
 | **Education** | Daftar pendidikan dengan GPA / nilai akhir |
 | **Organizations** | Riwayat organisasi; highlight bisa dibuka-tutup (accordion) |
@@ -50,7 +50,7 @@ Semua konten ada di `data/*.ts` — tidak perlu menyentuh komponen.
 
 | File | Isi |
 |---|---|
-| `data/profile.ts` | Nama, bio, roles, focus areas (marquee), tagline footer, link sosial, URL situs, `heroSnippet` (kartu di foto hero; set `illustrative: true` kalau bukan output asli) |
+| `data/profile.ts` | Nama, bio, roles, focus areas (marquee), tagline footer, link sosial, URL situs |
 | `data/education.ts` | Riwayat pendidikan |
 | `data/organizations.ts` | Organisasi. Prestasi berformat `"1st Place - Nama Lomba"` otomatis tampil sebagai badge |
 | `data/skills.ts` | Skill: `icon` = key dari `components/ui/SkillIcon.tsx`, `category`, `color` (warna brand saat hover) |
