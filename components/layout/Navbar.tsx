@@ -112,7 +112,7 @@ export default function Navbar() {
                       href={hrefFor(s.id)}
                       aria-current={isActive ? "true" : undefined}
                       className={cn(
-                        "relative block px-3 py-2 text-[13px] tracking-wide transition-colors duration-300",
+                        "relative block px-2.5 py-2 text-[13px] tracking-wide transition-colors duration-300 xl:px-3",
                         isActive ? "text-fg" : "text-fg-subtle hover:text-fg"
                       )}
                     >
@@ -120,7 +120,7 @@ export default function Navbar() {
                       {isActive && (
                         <motion.span
                           layoutId="nav-indicator"
-                          className="absolute inset-x-3 -bottom-px h-px bg-fg"
+                          className="absolute inset-x-2.5 -bottom-px h-px bg-fg xl:inset-x-3"
                           transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
                         />
                       )}

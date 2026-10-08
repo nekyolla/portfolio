@@ -12,6 +12,7 @@ export const sections: SectionLink[] = [
   { id: "education", label: "Education" },
   { id: "organization", label: "Organizations" },
   { id: "skills", label: "Skills" },
+  { id: "process", label: "Process" },
   { id: "projects", label: "Projects" },
   { id: "certificates", label: "Certificates" },
   ...(galleryItems.length > 0 ? [{ id: "gallery", label: "Gallery" }] : []),
