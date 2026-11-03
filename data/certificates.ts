@@ -2,6 +2,15 @@ import { Certificate } from "@/types";
 
 export const certificates: Certificate[] = [
   {
+    id: "11",
+    title: "AWS AI Academy 2026 - Level Dasar & Pemula",
+    issuer: "Dicoding Indonesia x AWS",
+    date: "September 2026",
+    credentialId: "AWS2026/L1-AI-0426",
+    pdfFile: "/certificate/aws-ai-academy.pdf",
+    previewImage: "/certificate/previews/aws-ai-academy.webp",
+  },
+  {
     id: "1",
     title: "Cloud Computing Fundamentals",
     issuer: "IBM SkillBuild",
