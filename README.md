@@ -54,8 +54,8 @@ Semua konten ada di `data/*.ts` — tidak perlu menyentuh komponen.
 | `data/education.ts` | Riwayat pendidikan |
 | `data/organizations.ts` | Organisasi. Prestasi berformat `"1st Place - Nama Lomba"` otomatis tampil sebagai badge |
 | `data/skills.ts` | Skill: `icon` = key dari `components/ui/SkillIcon.tsx`, `category`, `color` (warna brand saat hover) |
-| `data/projects.ts` | Project; project pertama tampil sebagai *featured*. `impact` = satu baris bukti (angka/hasil) yang tampil di kartu dan halaman detail |
-| `data/process.ts` | Langkah "How I work" dan angka statistiknya — angka harus sama dengan yang ada di `data/projects.ts` |
+| `data/projects.ts` | Project; project pertama tampil sebagai *featured*. `impact` = satu baris bukti (angka/hasil) yang tampil di kartu dan halaman detail. Angka yang dipakai di beberapa tempat ada di `projectFacts` |
+| `data/process.ts` | Langkah "How I work" dan angka statistiknya — angka diambil otomatis dari `projectFacts` di `data/projects.ts` |
 | `data/certificates.ts` | Sertifikat; `date` berformat `"Month YYYY"` (dipakai untuk urutan terbaru) |
 | `data/gallery.ts` | Foto kegiatan (section disembunyikan selama kosong) |
 

@@ -91,8 +91,6 @@ export interface ProcessStat {
   value: number;
   suffix?: string;
   label: string;
-  /** Where the number comes from (project slug), so it can be checked against data/projects.ts */
-  source?: string;
 }
 
 export interface Certificate {

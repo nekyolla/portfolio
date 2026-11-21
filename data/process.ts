@@ -1,8 +1,8 @@
 import { ProcessStat, ProcessStep } from "@/types";
-import { projects } from "@/data/projects";
+import { projectFacts, projects } from "@/data/projects";
 
 // "How I work" section. Every step points at something a project actually did,
-// and every stat is a number from data/projects.ts — update both together.
+// and every stat is read from data/projects.ts, so the numbers can't drift apart.
 export const processSteps: ProcessStep[] = [
   {
     title: "Frame the problem",
@@ -23,8 +23,8 @@ export const processSteps: ProcessStep[] = [
 ];
 
 export const processStats: ProcessStat[] = [
-  { value: 20, suffix: "+", label: "Documented API endpoints", source: "skp" },
-  { value: 66, label: "Workshop locations mapped", source: "bengkel-brainrot" },
-  { value: 6, label: "Achievement types, one flexible schema", source: "skp" },
+  { value: projectFacts.skp.endpoints, suffix: "+", label: "Documented API endpoints" },
+  { value: projectFacts.bengkel.locations, label: "Workshop locations mapped" },
+  { value: projectFacts.skp.achievementTypes, label: "Achievement types, one flexible schema" },
   { value: projects.length, label: "Projects built" },
 ];

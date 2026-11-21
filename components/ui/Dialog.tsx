@@ -24,10 +24,12 @@ interface DialogProps {
  */
 export default function Dialog({ open, onClose, labelledBy, children, className, outside }: DialogProps) {
   const isClient = useIsClient();
-  const panelRef = useRef<HTMLDivElement>(null);
+  // The trap and the dialog role cover the whole overlay, so controls rendered
+  // outside the panel (lightbox arrows) stay reachable with Tab and screen readers.
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useScrollLock(open);
-  useFocusTrap(panelRef, open, onClose);
+  useFocusTrap(dialogRef, open, onClose);
 
   if (!isClient) return null;
 
@@ -36,7 +38,12 @@ export default function Dialog({ open, onClose, labelledBy, children, className,
       {open && (
         <motion.div
           key="dialog"
-          className="fixed inset-0 z-[80] flex items-end justify-center sm:items-center sm:p-6"
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={labelledBy}
+          tabIndex={-1}
+          className="fixed inset-0 z-[80] flex items-end justify-center outline-none sm:items-center sm:p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -47,13 +54,7 @@ export default function Dialog({ open, onClose, labelledBy, children, className,
             onClick={onClose}
             aria-hidden
           />
-          {outside}
           <motion.div
-            ref={panelRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={labelledBy}
-            tabIndex={-1}
             data-lenis-prevent
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -74,6 +75,8 @@ export default function Dialog({ open, onClose, labelledBy, children, className,
             </button>
             {children}
           </motion.div>
+          {/* After the panel in DOM order: focus starts on Close, then Tab reaches these */}
+          {outside}
         </motion.div>
       )}
     </AnimatePresence>,

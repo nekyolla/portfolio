@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { profile } from "@/data/profile";
+import CurrentYear from "@/components/ui/CurrentYear";
 
 const socials = [
   { href: profile.github, label: "GitHub" },
@@ -59,7 +60,7 @@ export default function Footer() {
 
         <div className="mt-14 flex flex-col gap-2 border-t border-line pt-6 text-xs text-fg-subtle sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {profile.name}. All rights reserved.
+            © <CurrentYear buildYear={new Date().getFullYear()} /> {profile.name}. All rights reserved.
           </p>
           <p>Designed &amp; built with Next.js</p>
         </div>

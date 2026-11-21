@@ -1,5 +1,14 @@
 import { Project } from "@/types";
 
+// Numbers quoted in more than one place (project copy + the stats in data/process.ts).
+// Change them here and every mention updates.
+export const projectFacts = {
+  skp: { endpoints: 20, roles: 3, achievementTypes: 6 },
+  bengkel: { locations: 66 },
+} as const;
+
+const { skp, bengkel } = projectFacts;
+
 export const projects: Project[] = [
   {
     id: "1",
@@ -7,7 +16,7 @@ export const projects: Project[] = [
     title: "Student Achievement Credit System (SKP)",
     shortDesc:
       "A REST API backend for reporting and verifying student achievements with role-based access control, built with Go and Fiber using dual-database architecture.",
-    impact: "20+ endpoints · 3 roles · draft\u00a0→\u00a0verified workflow",
+    impact: `${skp.endpoints}+ endpoints · ${skp.roles} roles · draft\u00a0→\u00a0verified workflow`,
     fullDesc: `The Student Achievement Credit System (SKP) is a backend REST API built for Universitas Airlangga's Informatics Engineering program. It enables students to report their academic and non-academic achievements, advisors to verify them, and admins to manage the entire system.
 
 The system uses a dual-database architecture: PostgreSQL handles relational data and RBAC (roles, permissions, users, students, lecturers), while MongoDB stores dynamic achievement data with flexible fields per achievement type — competitions, publications, organizations, certifications, and more.
@@ -24,10 +33,10 @@ Key technical achievements include designing a hybrid PostgreSQL + MongoDB archi
     role: "Backend Developer",
     highlights: [
       "Dual-database architecture: PostgreSQL for RBAC + MongoDB for dynamic achievement data",
-      "Fine-grained RBAC with 3 roles (Admin, Student, Advisor) and 6+ permissions",
+      `Fine-grained RBAC with ${skp.roles} roles (Admin, Student, Advisor) and 6+ permissions`,
       "Achievement workflow: draft → submitted → verified / rejected",
-      "Supports 6 achievement types with flexible dynamic fields per category",
-      "Full Swagger API documentation with 20+ endpoints",
+      `Supports ${skp.achievementTypes} achievement types with flexible dynamic fields per category`,
+      `Full Swagger API documentation with ${skp.endpoints}+ endpoints`,
       "Final Project — Advanced Backend Programming Practicum, Universitas Airlangga",
     ],
   },
@@ -97,7 +106,7 @@ Key technical achievements include building a full ARM pipeline from raw CSV par
     title: "Bengkel Brainrot — Campus Workshop Directory",
     shortDesc:
       "A map-based directory app for finding nearby workshops around Universitas Airlangga, featuring real-time GPS, turn-by-turn navigation, and a full admin CRUD panel.",
-    impact: "66 locations · turn-by-turn navigation in Bahasa Indonesia",
+    impact: `${bengkel.locations} locations · turn-by-turn navigation in Bahasa Indonesia`,
     fullDesc: `Bengkel Brainrot is a cloud-native mobile directory application built for the Cloud Computing final project at Universitas Airlangga. It helps students and campus residents quickly find nearby workshops (bengkel) with complete details, live distance calculation, and real-time navigation.
 
 The system follows a strict cloud-native architecture: a React Native (Expo) mobile app communicates exclusively through a Node.js + Express REST API deployed serverlessly on Vercel, which acts as a security gatekeeper before any interaction with Supabase (PostgreSQL). This prevents direct database access from the client entirely.
@@ -125,7 +134,7 @@ Backend security follows OWASP Top 10 API Security standards with strict input v
     teamSize: 4,
     role: "Backend Engineer",
     highlights: [
-      "66 workshop locations seeded from CSV, displayed as live GPS markers on Google Maps",
+      `${bengkel.locations} workshop locations seeded from CSV, displayed as live GPS markers on Google Maps`,
       "Turn-by-turn navigation in Bahasa Indonesia powered by OSRM (free, open-source routing)",
       "Automatic arrival detection within 30-meter GPS threshold",
       "Admin CRUD panel with visual map picker for coordinate selection",
