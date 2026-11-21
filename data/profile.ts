@@ -32,7 +32,7 @@ My long-term vision is simple: stay curious, keep learning, and turn that knowle
   profileImage: "/images/profile/photo.jpg",
   profileImageAlt: "Abdillah sitting on a rocky mountain ridge above the clouds",
   cvFile: "/cv/cv.pdf",
-  location: "Malang, East Java, Indonesia",
+  location: "Surabaya, East Java, Indonesia",
   siteUrl: "https://portfolio-astral-express.vercel.app",
 };
 

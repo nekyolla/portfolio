@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
@@ -124,25 +123,6 @@ export default async function ProjectPage({ params }: Params) {
             <dd className="mt-1 text-[15px] text-fg-muted">{project.techStack.join(", ")}</dd>
           </div>
         </dl>
-
-        {/* No screenshot: skip the image block (the header already carries the impact line) */}
-        {project.thumbnail && (
-          <div
-            className="fade-up relative mt-12 aspect-[16/10] overflow-hidden rounded-3xl border border-line bg-muted md:mt-16"
-            style={delay(650)}
-          >
-            <Image
-              src={project.thumbnail}
-              alt={`Screenshot of ${project.title}`}
-              fill
-              loading="eager"
-              fetchPriority="high"
-              sizes="(min-width: 1200px) 1104px, 100vw"
-              quality={85}
-              className="object-cover object-top"
-            />
-          </div>
-        )}
 
         <div className="mt-20 grid gap-10 md:mt-28 md:grid-cols-12">
           <Reveal className="md:col-span-3">

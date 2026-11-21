@@ -4,12 +4,12 @@ import { useId, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import type { Organization } from "@/types";
-import { cn, splitPlacement } from "@/lib/utils";
+import { cn, sortAchievements, splitPlacement } from "@/lib/utils";
 
 export default function OrganizationItem({ org }: { org: Organization }) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
-  const achievements = org.achievements ?? [];
+  const achievements = sortAchievements(org.achievements ?? []);
 
   return (
     <article className="grid gap-4 py-8 md:grid-cols-12 md:gap-6 md:py-10">

@@ -89,8 +89,6 @@ export interface Project {
   title: string;
   shortDesc: string;
   fullDesc: string;
-  /** Screenshot; without one the card shows a typographic cover built from `impact` */
-  thumbnail?: string;
   techStack: string[];
   githubUrl?: string;
   liveUrl?: string;

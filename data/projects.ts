@@ -10,7 +10,7 @@ export const projectFacts = {
 
 const { skp, bengkel, indobert } = projectFacts;
 
-// Order follows the CV; the first project is shown as the featured one.
+// Order = hierarchy on the page (top to bottom), following the CV.
 export const projects: Project[] = [
   {
     id: "6",
@@ -52,10 +52,8 @@ Users can upload their own CSV transaction dataset or use the built-in dummy dat
 The application includes an automated business insight section that highlights the best rule by confidence and the highest lift rule, along with actionable cross-selling recommendations such as product placement strategies and bundle discount suggestions.
 
 Key technical achievements include building a full ARM pipeline from raw CSV parsing to one-hot encoding, frequent itemset mining, and rule generation — all within a single-file Streamlit app with no backend required.`,
-    thumbnail: "/images/projects/arm.webp",
     techStack: ["Python", "Streamlit", "Pandas", "mlxtend"],
-    // The old repo link (github.com/nekyolla/apriori) returns 404 — add the new one here if it moved
-    githubUrl: "",
+    githubUrl: "https://github.com/xdante68/apriori",
     liveUrl: "",
     period: "2026",
     teamSize: 1,
@@ -85,7 +83,6 @@ Navigation is powered by OSRM (Open Source Routing Machine) — a free, open-sou
 The admin side features secure Supabase Auth login, full CRUD management of workshop data, and a visual map picker that lets admins set coordinates by dragging a marker on an interactive map instead of manually entering lat/lng values.
 
 Backend security follows OWASP Top 10 API Security standards with strict input validation, centralized error handling, and standardized JSON response formatting.`,
-    thumbnail: "/images/projects/bengkel.webp",
     techStack: [
       "React Native",
       "Expo",
@@ -127,7 +124,6 @@ The backend is powered by Google Apps Script (GAS) with Google Sheets as the sto
 The system follows a strict cross-group compatibility contract — any client from other groups can connect to this server and vice versa, enabling swap testing as part of the course assessment.
 
 Key technical achievements include implementing a stateless token-based QR attendance system with expiry validation, building a batch accelerometer ingestion pipeline, and rendering GPS history as polylines on an interactive map.`,
-    thumbnail: "/images/projects/cloudtrack.webp",
     techStack: ["Google Apps Script", "Google Sheets", "TypeScript", "Next.js", "Vercel", "REST API", "Postman"],
     githubUrl: "https://github.com/nekyolla/cloud-computing-uts",
     liveUrl: "https://cloudk4.vercel.app",
@@ -157,7 +153,6 @@ External factors are entered as weighted threats and opportunities, while intern
 From those inputs the app calculates the SAP (Strategic Advantage Profile) and ETOP (Environmental Threat and Opportunity Profile) automatically and positions the result in a strategy quadrant.
 
 It runs fully in the browser — React, Vite and TailwindCSS with no backend — and is deployed on Vercel.`,
-    thumbnail: "/images/projects/tows.webp",
     techStack: ["React", "Vite", "TailwindCSS", "Vercel"],
     githubUrl: "https://github.com/nekyolla/tows-analyzer-bbk8-sidotentrem",
     liveUrl: "https://tows-calculator.vercel.app",
@@ -184,7 +179,6 @@ The system uses a dual-database architecture: PostgreSQL handles relational data
 Authentication is handled via JWT with a custom RBAC middleware that checks permissions on every endpoint. The achievement workflow follows a draft → submitted → verified/rejected lifecycle, with each state transition triggering notifications to relevant parties.
 
 Key technical achievements include designing a hybrid PostgreSQL + MongoDB architecture that balances relational integrity with document flexibility, implementing a fine-grained RBAC system with 6+ permissions, and building a dynamic schema for achievement details that adapts per category without schema migrations.`,
-    thumbnail: "/images/projects/skp.webp",
     techStack: ["Go", "Fiber", "PostgreSQL", "MongoDB", "JWT", "Swagger", "REST API"],
     githubUrl: "https://github.com/nekyolla/sistem-kredit-prestasi",
     liveUrl: "",
@@ -215,7 +209,6 @@ The site follows a fully data-driven architecture — all content (experience, p
 The design pairs a warm serif display typeface with a clean sans-serif, on a paper-like ivory palette with a matching charcoal dark mode. Motion is deliberately calm: smooth inertial scrolling, masked text reveals, and soft blur-fade transitions — all of which switch off automatically for visitors who prefer reduced motion.
 
 Key technical achievements include a fully type-safe data layer, mostly server-rendered components to keep the JavaScript bundle small, self-hosted fonts and icons with no third-party requests, an accessible dialog with focus management, and optimized, metadata-stripped images.`,
-    thumbnail: "/images/projects/portfolio.webp",
     techStack: ["Next.js", "TypeScript", "TailwindCSS", "Framer Motion", "Lenis", "Vercel"],
     githubUrl: "https://github.com/nekyolla/portfolio",
     liveUrl: "https://portfolio-astral-express.vercel.app/",

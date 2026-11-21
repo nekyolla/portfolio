@@ -1,5 +1,6 @@
 import { Certificate } from "@/types";
 
+// Shown newest first (sorted by date); within the same month, this file's order is kept (follows the CV).
 export const certificates: Certificate[] = [
   {
     id: "12",
@@ -50,16 +51,6 @@ export const certificates: Certificate[] = [
     previewImage: "/certificate/previews/linux.webp",
   },
   {
-    id: "4",
-    title: "Belajar Dasar AI",
-    issuer: "Dicoding Indonesia",
-    date: "March 2026",
-    credentialId: "KEXLQ9W50PG2",
-    credentialUrl: "https://www.dicoding.com/certificates/KEXLQ9W50PG2",
-    pdfFile: "/certificate/dasarai.pdf",
-    previewImage: "/certificate/previews/dasarai.webp",
-  },
-  {
     id: "5",
     title: "Belajar Penerapan Data Science dengan Microsoft Fabric",
     issuer: "Dicoding Indonesia",
@@ -68,6 +59,16 @@ export const certificates: Certificate[] = [
     credentialUrl: "https://www.dicoding.com/certificates/N9ZON5EJ6XG5",
     pdfFile: "/certificate/fabric.pdf",
     previewImage: "/certificate/previews/fabric.webp",
+  },
+  {
+    id: "4",
+    title: "Belajar Dasar AI",
+    issuer: "Dicoding Indonesia",
+    date: "March 2026",
+    credentialId: "KEXLQ9W50PG2",
+    credentialUrl: "https://www.dicoding.com/certificates/KEXLQ9W50PG2",
+    pdfFile: "/certificate/dasarai.pdf",
+    previewImage: "/certificate/previews/dasarai.webp",
   },
   {
     id: "6",

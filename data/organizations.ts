@@ -1,17 +1,19 @@
 import { Organization } from "@/types";
 
+// Order = hierarchy on the page (top to bottom), following the CV; school-era roles last.
+// Achievements are sorted automatically: 1st → 2nd → 3rd place, newest year first.
 export const organizations: Organization[] = [
   {
-    id: "1",
-    name: "Student Council of State Senior High School 1 Wirosari",
-    role: "Environmental and Academic Division Officer",
-    period: "2020 - 2021",
+    id: "3",
+    name: "Student Executive Board, Universitas Airlangga",
+    role: "Creative Product and Investment Officer",
+    period: "2024 - 2025",
     description:
-      "Planned and executed strategic student council programs focused on environmental sustainability and academic development.",
+      "Fostered student business potential and creative investments to build a competitive entrepreneurship ecosystem connected with the creative economy sector.",
     achievements: [
-      "Initiated a green campaign by upcycling used bottles into plant pots to enhance school eco-friendliness.",
-      "Spearheaded a 'Bring Your Own Tumbler' campaign, successfully reducing single-use plastic waste on campus.",
-      "Curated and distributed a database of past midterm and final exam papers to support student test preparation.",
+      "Co-organized the 'Airlangga Business Forum', a university-wide business plan competition aimed at fostering innovation and student entrepreneurship.",
+      "Successfully held an investment and cryptocurrency seminar in collaboration with industry partners like Coinkami to improve financial literacy among students.",
+      "Facilitated networking opportunities between student innovators and external industrial sectors to boost the economic value of local creative products.",
     ],
   },
   {
@@ -29,27 +31,15 @@ export const organizations: Organization[] = [
     ],
   },
   {
-    id: "3",
-    name: "Student Executive Board, Universitas Airlangga",
-    role: "Creative Product and Investment Officer",
-    period: "2024 - 2025",
-    description:
-      "Fostered student business potential and creative investments to build a competitive entrepreneurship ecosystem connected with the creative economy sector.",
-    achievements: [
-      "Co-organized the 'Airlangga Business Forum', a university-wide business plan competition aimed at fostering innovation and student entrepreneurship.",
-      "Successfully held an investment and cryptocurrency seminar in collaboration with industry partners like Coinkami to improve financial literacy among students.",
-      "Facilitated networking opportunities between student innovators and external industrial sectors to boost the economic value of local creative products.",
-    ],
-  },
-  {
     id: "4",
     name: "UNAIR Esports",
     role: "Esports Athlete - Goldlaner",
-    period: "2023 - 2025",
+    period: "2023 - 2026",
     description:
       "Representing Universitas Airlangga in national-level esports competitions, competing as a professional Goldlaner for the Mobile Legends: Bang Bang team.",
     achievements: [
       "1st Place - Rector's Cup UPN Veteran Jawa Timur x AMN Cup 2023",
+      "2nd Place - Rector's Cup UNAIR 2026",
       "1st Place - National Mogmain Festival Esports Tournament 2024",
       "1st Place - Airlangga Esports League 2025",
       "1st Place - UNUSA Cup Series 2024",
@@ -60,6 +50,19 @@ export const organizations: Organization[] = [
       "2nd Place - Management Esports Competition UNAIR 2024",
       "3rd Place - Airlangga Esports Competition 2024",
       "3rd Place - Epiclair Esports Tournament 2025",
+    ],
+  },
+  {
+    id: "1",
+    name: "Student Council of State Senior High School 1 Wirosari",
+    role: "Environmental and Academic Division Officer",
+    period: "2020 - 2021",
+    description:
+      "Planned and executed strategic student council programs focused on environmental sustainability and academic development.",
+    achievements: [
+      "Initiated a green campaign by upcycling used bottles into plant pots to enhance school eco-friendliness.",
+      "Spearheaded a 'Bring Your Own Tumbler' campaign, successfully reducing single-use plastic waste on campus.",
+      "Curated and distributed a database of past midterm and final exam papers to support student test preparation.",
     ],
   },
 ];

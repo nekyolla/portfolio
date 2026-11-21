@@ -38,7 +38,7 @@ Website portfolio pribadi yang dibangun dengan Next.js 16, menampilkan profil, p
 | **Organizations** | Riwayat organisasi; highlight bisa dibuka-tutup (accordion) |
 | **Skills** | Dikelompokkan per kategori (Languages, AI / ML, Frameworks, Databases, Tools) |
 | **Process** | Cara kerja dalam 4 langkah + angka (count-up) yang diambil dari data project |
-| **Projects** | Project unggulan + grid dengan baris *impact* (bukti singkat); seluruh kartu bisa diklik, ada halaman detail per project (`/projects/[slug]`) dengan navigasi prev/next |
+| **Projects** | Daftar project (urut sesuai CV) dengan baris *impact* (bukti singkat); seluruh baris bisa diklik, ada halaman detail per project (`/projects/[slug]`) dengan navigasi prev/next |
 | **Certificates** | Grid preview sertifikat + filter per penerbit; dialog dengan preview, verifikasi, buka PDF, dan download |
 | **Gallery** | Foto kegiatan + lightbox — otomatis muncul begitu `data/gallery.ts` berisi foto |
 | **Contact** | Ajakan kontak, email (dengan tombol copy), social links, CV |
@@ -54,11 +54,11 @@ Semua konten ada di `data/*.ts` — tidak perlu menyentuh komponen.
 | `data/profile.ts` | Nama, bio, roles, focus areas (marquee), tagline footer, link sosial, URL situs |
 | `data/experience.ts` | Pengalaman kerja/magang |
 | `data/education.ts` | Riwayat pendidikan |
-| `data/organizations.ts` | Organisasi. Prestasi berformat `"1st Place - Nama Lomba"` otomatis tampil sebagai badge |
+| `data/organizations.ts` | Organisasi; urutan di file = urutan tampil. Prestasi berformat `"1st Place - Nama Lomba 2026"` otomatis tampil sebagai badge dan diurutkan (juara 1 → 3, tahun terbaru dulu) |
 | `data/skills.ts` | Skill: `icon` = key dari `components/ui/SkillIcon.tsx`, `category`, `color` (warna brand saat hover) |
-| `data/projects.ts` | Project; project pertama tampil sebagai *featured*. `impact` = satu baris bukti (angka/hasil) yang tampil di kartu dan halaman detail. `thumbnail` opsional — tanpa screenshot, kartu memakai cover tipografi dari `impact`. Angka yang dipakai di beberapa tempat ada di `projectFacts` |
+| `data/projects.ts` | Project; urutan di file = urutan tampil (paling penting di atas). `impact` = satu baris bukti (angka/hasil) yang tampil di daftar dan halaman detail. Angka yang dipakai di beberapa tempat ada di `projectFacts` |
 | `data/process.ts` | Langkah "How I work" dan angka statistiknya — angka diambil otomatis dari `projectFacts` di `data/projects.ts` |
-| `data/certificates.ts` | Sertifikat; `date` berformat `"Month YYYY"` (dipakai untuk urutan terbaru) |
+| `data/certificates.ts` | Sertifikat; `date` berformat `"Month YYYY"` (diurutkan terbaru dulu; di bulan yang sama mengikuti urutan file) |
 | `data/gallery.ts` | Foto kegiatan (section disembunyikan selama kosong) |
 
 **Menambah skill dengan ikon baru:** import ikonnya dari `react-icons/si` di `components/ui/SkillIcon.tsx`, daftarkan key-nya, lalu pakai key itu di `data/skills.ts`.

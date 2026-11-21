@@ -41,3 +41,23 @@ export function splitPlacement(text: string): { placement?: string; title: strin
   if (!match) return { title: text };
   return { placement: match[1], title: match[2] };
 }
+
+/**
+ * Orders achievements by value: best placement first (1st → 2nd → 3rd), then newest year.
+ * Entries without a placement keep their original order after the placed ones.
+ */
+export function sortAchievements(items: string[]): string[] {
+  const rank = (text: string) => {
+    const { placement, title } = splitPlacement(text);
+    const place = placement ? parseInt(placement, 10) : Infinity;
+    const years = title.match(/\b(19|20)\d{2}\b/g);
+    const year = years ? Number(years[years.length - 1]) : 0;
+    return { place, year };
+  };
+  return [...items].sort((a, b) => {
+    const ra = rank(a);
+    const rb = rank(b);
+    if (ra.place !== rb.place) return ra.place - rb.place;
+    return rb.year - ra.year;
+  });
+}
