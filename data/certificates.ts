@@ -2,6 +2,17 @@ import { Certificate } from "@/types";
 
 export const certificates: Certificate[] = [
   {
+    id: "12",
+    title: "AWS Certified AI Practitioner (AIF-C01)",
+    issuer: "Amazon Web Services",
+    date: "November 2026",
+    credentialId: "b396174caaa84818a1608e8d270cc177",
+    // AWS has no per-credential link: the page asks for the validation number above
+    credentialUrl: "https://aws.amazon.com/verification",
+    pdfFile: "/certificate/aws-ai-practitioner.pdf",
+    previewImage: "/certificate/previews/aws-ai-practitioner.webp",
+  },
+  {
     id: "11",
     title: "AWS AI Academy 2026 - Level Dasar & Pemula",
     issuer: "Dicoding Indonesia x AWS",
@@ -13,20 +24,20 @@ export const certificates: Certificate[] = [
   {
     id: "1",
     title: "Cloud Computing Fundamentals",
-    issuer: "IBM SkillBuild",
+    issuer: "IBM SkillsBuild",
     date: "April 2026",
     credentialId: "c5f3f7e9-103e-45fb-8e4b-a0b85a9137d1",
-    credentialUrl: "https://www.credly.com/earner/earned/badge/c5f3f7e9-103e-45fb-8e4b-a0b85a9137d1",
+    credentialUrl: "https://www.credly.com/badges/c5f3f7e9-103e-45fb-8e4b-a0b85a9137d1",
     pdfFile: "/certificate/ccf.pdf",
     previewImage: "/certificate/previews/ccf.webp",
   },
   {
     id: "2",
     title: "Journey to Cloud: Orchestrating your Solution",
-    issuer: "IBM SkillBuild",
+    issuer: "IBM SkillsBuild",
     date: "April 2026",
     credentialId: "3949db19-2901-4d31-a76c-c2f975a79478",
-    credentialUrl: "https://www.credly.com/earner/earned/badge/3949db19-2901-4d31-a76c-c2f975a79478",
+    credentialUrl: "https://www.credly.com/badges/3949db19-2901-4d31-a76c-c2f975a79478",
     pdfFile: "/certificate/j2c.pdf",
     previewImage: "/certificate/previews/j2c.webp",
   },

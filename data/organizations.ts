@@ -45,7 +45,7 @@ export const organizations: Organization[] = [
     id: "4",
     name: "UNAIR Esports",
     role: "Esports Athlete - Goldlaner",
-    period: "2024 - 2025",
+    period: "2023 - 2025",
     description:
       "Representing Universitas Airlangga in national-level esports competitions, competing as a professional Goldlaner for the Mobile Legends: Bang Bang team.",
     achievements: [

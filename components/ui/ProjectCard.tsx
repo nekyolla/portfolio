@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import type { Project } from "@/types";
+import ProjectCover from "@/components/ui/ProjectCover";
 import { cn, hasValue, padIndex } from "@/lib/utils";
 
 interface ProjectCardProps {
@@ -25,13 +26,17 @@ export default function ProjectCard({ project, index, featured = false }: Projec
           featured && "lg:col-span-7"
         )}
       >
-        <Image
-          src={project.thumbnail}
-          alt=""
-          fill
-          sizes={featured ? "(min-width: 1024px) 660px, 100vw" : "(min-width: 768px) 540px, 100vw"}
-          className="object-cover object-top transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"
-        />
+        {project.thumbnail ? (
+          <Image
+            src={project.thumbnail}
+            alt=""
+            fill
+            sizes={featured ? "(min-width: 1024px) 660px, 100vw" : "(min-width: 768px) 540px, 100vw"}
+            className="object-cover object-top transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"
+          />
+        ) : (
+          <ProjectCover project={project} large={featured} />
+        )}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
         <span className="pointer-events-none absolute right-4 bottom-4 grid h-11 w-11 translate-y-2 place-items-center rounded-full bg-surface text-fg opacity-0 shadow-lg transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
           <ArrowUpRight size={18} strokeWidth={1.75} aria-hidden />
@@ -68,8 +73,9 @@ export default function ProjectCard({ project, index, featured = false }: Projec
           {project.shortDesc}
         </p>
 
+        {/* Without a screenshot the cover already shows the impact line (visually, aria-hidden) */}
         {project.impact && (
-          <p className="mt-4 font-mono text-xs tracking-wide text-accent">
+          <p className={cn("mt-4 font-mono text-xs tracking-wide text-accent", !project.thumbnail && "sr-only")}>
             <span className="sr-only">Impact: </span>
             {project.impact}
           </p>

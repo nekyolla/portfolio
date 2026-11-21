@@ -1,5 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
+import Experience from "@/components/sections/Experience";
 import Education from "@/components/sections/Education";
 import Organization from "@/components/sections/Organization";
 import Skills from "@/components/sections/Skills";
@@ -38,6 +39,7 @@ export default function Home() {
       <Hero />
       <Marquee items={profile.focusAreas} />
       <About />
+      <Experience />
       <Education />
       <Organization />
       <Skills />

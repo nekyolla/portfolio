@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion/Reveal";
 
 const CATEGORY_ORDER: SkillCategory[] = [
   "Languages",
+  "AI / ML",
   "Frameworks & Libraries",
   "Databases & BaaS",
   "Tools & Platforms",

@@ -136,7 +136,8 @@ export default function Navbar() {
             <a
               href={profile.cvFile}
               download={`${profile.name.replace(/\s+/g, "-")}-CV.pdf`}
-              className="btn btn-ghost ml-2 hidden min-h-0 py-2 text-[13px] sm:inline-flex"
+              // Hidden from lg to xl: the nav links need the room there (Download CV stays in the hero and contact)
+              className="btn btn-ghost ml-2 hidden min-h-0 py-2 text-[13px] sm:inline-flex lg:hidden xl:inline-flex"
             >
               Résumé
               <ArrowDownToLine size={14} strokeWidth={1.75} aria-hidden />

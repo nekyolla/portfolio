@@ -53,7 +53,26 @@ export interface Organization {
   achievements?: string[];
 }
 
-export type SkillCategory = "Languages" | "Frameworks & Libraries" | "Databases & BaaS" | "Tools & Platforms";
+export interface Experience {
+  id: string;
+  role: string;
+  company: string;
+  /** Department or office within the company */
+  unit?: string;
+  /** e.g. "Internship" */
+  type?: string;
+  location: string;
+  period: string;
+  highlights: string[];
+  techStack?: string[];
+}
+
+export type SkillCategory =
+  | "Languages"
+  | "AI / ML"
+  | "Frameworks & Libraries"
+  | "Databases & BaaS"
+  | "Tools & Platforms";
 
 export interface Skill {
   name: string;
@@ -70,7 +89,8 @@ export interface Project {
   title: string;
   shortDesc: string;
   fullDesc: string;
-  thumbnail: string;
+  /** Screenshot; without one the card shows a typographic cover built from `impact` */
+  thumbnail?: string;
   techStack: string[];
   githubUrl?: string;
   liveUrl?: string;

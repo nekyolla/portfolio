@@ -9,6 +9,7 @@ export interface SectionLink {
 // and the "01 / 02 / …" numbering. Gallery only shows up once it has photos.
 export const sections: SectionLink[] = [
   { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
   { id: "education", label: "Education" },
   { id: "organization", label: "Organizations" },
   { id: "skills", label: "Skills" },

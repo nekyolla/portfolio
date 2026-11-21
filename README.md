@@ -1,8 +1,8 @@
 # Portfolio — Nekyolla
 
-Website portfolio pribadi yang dibangun dengan Next.js 16, menampilkan profil, pendidikan, organisasi, skills, project, sertifikat, dan galeri kegiatan.
+Website portfolio pribadi yang dibangun dengan Next.js 16, menampilkan profil, pengalaman kerja, pendidikan, organisasi, skills, project, sertifikat, dan galeri kegiatan.
 
-> **Live Demo:** [https://nekyollas-portfolio.vercel.app/](https://nekyollas-portfolio.vercel.app/)
+> **Live Demo:** [https://portfolio-astral-express.vercel.app/](https://portfolio-astral-express.vercel.app/)
 
 ---
 
@@ -33,9 +33,10 @@ Website portfolio pribadi yang dibangun dengan Next.js 16, menampilkan profil, p
 |---|---|
 | **Hero** | Nama besar (serif), bio, roles, tombol Download CV + Get in touch, social links, foto berbentuk arch |
 | **About** | Bio panjang + detail (lokasi, kampus, program, GPA, minat, email + tombol copy) |
+| **Experience** | Pengalaman kerja/magang: peran, instansi, poin pekerjaan, dan tech stack |
 | **Education** | Daftar pendidikan dengan GPA / nilai akhir |
 | **Organizations** | Riwayat organisasi; highlight bisa dibuka-tutup (accordion) |
-| **Skills** | Dikelompokkan per kategori (Languages, Frameworks, Databases, Tools) |
+| **Skills** | Dikelompokkan per kategori (Languages, AI / ML, Frameworks, Databases, Tools) |
 | **Process** | Cara kerja dalam 4 langkah + angka (count-up) yang diambil dari data project |
 | **Projects** | Project unggulan + grid dengan baris *impact* (bukti singkat); seluruh kartu bisa diklik, ada halaman detail per project (`/projects/[slug]`) dengan navigasi prev/next |
 | **Certificates** | Grid preview sertifikat + filter per penerbit; dialog dengan preview, verifikasi, buka PDF, dan download |
@@ -51,10 +52,11 @@ Semua konten ada di `data/*.ts` — tidak perlu menyentuh komponen.
 | File | Isi |
 |---|---|
 | `data/profile.ts` | Nama, bio, roles, focus areas (marquee), tagline footer, link sosial, URL situs |
+| `data/experience.ts` | Pengalaman kerja/magang |
 | `data/education.ts` | Riwayat pendidikan |
 | `data/organizations.ts` | Organisasi. Prestasi berformat `"1st Place - Nama Lomba"` otomatis tampil sebagai badge |
 | `data/skills.ts` | Skill: `icon` = key dari `components/ui/SkillIcon.tsx`, `category`, `color` (warna brand saat hover) |
-| `data/projects.ts` | Project; project pertama tampil sebagai *featured*. `impact` = satu baris bukti (angka/hasil) yang tampil di kartu dan halaman detail. Angka yang dipakai di beberapa tempat ada di `projectFacts` |
+| `data/projects.ts` | Project; project pertama tampil sebagai *featured*. `impact` = satu baris bukti (angka/hasil) yang tampil di kartu dan halaman detail. `thumbnail` opsional — tanpa screenshot, kartu memakai cover tipografi dari `impact`. Angka yang dipakai di beberapa tempat ada di `projectFacts` |
 | `data/process.ts` | Langkah "How I work" dan angka statistiknya — angka diambil otomatis dari `projectFacts` di `data/projects.ts` |
 | `data/certificates.ts` | Sertifikat; `date` berformat `"Month YYYY"` (dipakai untuk urutan terbaru) |
 | `data/gallery.ts` | Foto kegiatan (section disembunyikan selama kosong) |

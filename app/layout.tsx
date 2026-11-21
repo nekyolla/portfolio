@@ -47,6 +47,8 @@ export const metadata: Metadata = {
     "informatics engineering",
     "Universitas Airlangga",
     "machine learning",
+    "natural language processing",
+    "AWS Certified AI Practitioner",
     "data science",
     "artificial intelligence",
     "backend engineer",

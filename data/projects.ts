@@ -5,69 +5,37 @@ import { Project } from "@/types";
 export const projectFacts = {
   skp: { endpoints: 20, roles: 3, achievementTypes: 6 },
   bengkel: { locations: 66 },
+  indobert: { samples: "2,620", accuracy: "98.57%", f1: "98.64%", errors: 3, testSize: 210 },
 } as const;
 
-const { skp, bengkel } = projectFacts;
+const { skp, bengkel, indobert } = projectFacts;
 
+// Order follows the CV; the first project is shown as the featured one.
 export const projects: Project[] = [
   {
-    id: "1",
-    slug: "skp",
-    title: "Student Achievement Credit System (SKP)",
+    id: "6",
+    slug: "indobert-spam-classification",
+    title: "Indonesian Email Spam Classification with IndoBERT",
     shortDesc:
-      "A REST API backend for reporting and verifying student achievements with role-based access control, built with Go and Fiber using dual-database architecture.",
-    impact: `${skp.endpoints}+ endpoints · ${skp.roles} roles · draft\u00a0→\u00a0verified workflow`,
-    fullDesc: `The Student Achievement Credit System (SKP) is a backend REST API built for Universitas Airlangga's Informatics Engineering program. It enables students to report their academic and non-academic achievements, advisors to verify them, and admins to manage the entire system.
+      "A fine-tuned IndoBERT model that sorts Indonesian emails into spam and not spam, served through a Streamlit app for single and bulk CSV predictions.",
+    impact: `${indobert.accuracy} accuracy · ${indobert.f1} F1 · ${indobert.errors} errors in ${indobert.testSize} test emails`,
+    fullDesc: `A binary text classifier for emails written in Indonesian, built as the Data Mining final project at Universitas Airlangga by fine-tuning IndoBERT (indobenchmark/indobert-base-p1).
 
-The system uses a dual-database architecture: PostgreSQL handles relational data and RBAC (roles, permissions, users, students, lecturers), while MongoDB stores dynamic achievement data with flexible fields per achievement type — competitions, publications, organizations, certifications, and more.
+The end-to-end NLP pipeline covers data cleaning, text preprocessing, tokenization, model training and evaluation on a dataset of ${indobert.samples} labelled emails.
 
-Authentication is handled via JWT with a custom RBAC middleware that checks permissions on every endpoint. The achievement workflow follows a draft → submitted → verified/rejected lifecycle, with each state transition triggering notifications to relevant parties.
+On unseen test data the model reached ${indobert.accuracy} accuracy and a ${indobert.f1} F1-score, misclassifying only ${indobert.errors} of ${indobert.testSize} samples. Learning curves were used to analyse overfitting, and mitigation strategies were documented for future iterations.
 
-Key technical achievements include designing a hybrid PostgreSQL + MongoDB architecture that balances relational integrity with document flexibility, implementing a fine-grained RBAC system with 6+ permissions, and building a dynamic schema for achievement details that adapts per category without schema migrations.`,
-    thumbnail: "/images/projects/skp.webp",
-    techStack: ["Go", "Fiber", "PostgreSQL", "MongoDB", "JWT", "Swagger", "REST API"],
-    githubUrl: "https://github.com/nekyolla/sistem-kredit-prestasi",
-    liveUrl: "",
-    period: "Nov 2025 - Jan 2026",
-    teamSize: 1,
-    role: "Backend Developer",
+The model is served through a Streamlit web app that handles both single emails and bulk CSV uploads, with a confidence score for every prediction.`,
+    techStack: ["Python", "IndoBERT", "HuggingFace Transformers", "Streamlit"],
+    period: "2026",
+    role: "NLP Engineer",
     highlights: [
-      "Dual-database architecture: PostgreSQL for RBAC + MongoDB for dynamic achievement data",
-      `Fine-grained RBAC with ${skp.roles} roles (Admin, Student, Advisor) and 6+ permissions`,
-      "Achievement workflow: draft → submitted → verified / rejected",
-      `Supports ${skp.achievementTypes} achievement types with flexible dynamic fields per category`,
-      `Full Swagger API documentation with ${skp.endpoints}+ endpoints`,
-      "Final Project — Advanced Backend Programming Practicum, Universitas Airlangga",
-    ],
-  },
-  {
-    id: "2",
-    slug: "cloudtrack",
-    title: "CloudTrack",
-    shortDesc:
-      "A cloud-based IoT telemetry and attendance platform supporting QR-based check-in, accelerometer batch streaming, and real-time GPS tracking with map visualization.",
-    impact: "QR attendance + accelerometer + GPS in one API",
-    fullDesc: `CloudTrack is a cloud-based platform built for Universitas Airlangga's Cloud Computing practicum. It integrates three core modules — dynamic QR attendance, accelerometer telemetry, and GPS tracking — into a single unified API following the API Contract Simple v1 standard.
-
-The backend is powered by Google Apps Script (GAS) with Google Sheets as the storage layer, handling four data sheets: tokens, presence, accel, and gps. The web client is built with TypeScript and deployed on Vercel, providing an interface for QR scanning, sensor data streaming, and live map visualization using marker and polyline rendering.
-
-The system follows a strict cross-group compatibility contract — any client from other groups can connect to this server and vice versa, enabling swap testing as part of the course assessment.
-
-Key technical achievements include implementing a stateless token-based QR attendance system with expiry validation, building a batch accelerometer ingestion pipeline, and rendering GPS history as polylines on an interactive map.`,
-    thumbnail: "/images/projects/cloudtrack.webp",
-    techStack: ["Google Apps Script", "Google Sheets", "TypeScript", "Next.js", "Vercel", "REST API", "Postman"],
-    githubUrl: "https://github.com/nekyolla/TuCil-Cloud-Computing-Kel-4",
-    liveUrl: "https://cloudk4.vercel.app",
-    period: "Feb 2026",
-    teamSize: 4,
-    role: "Backend Engineer and Documentator",
-    highlights: [
-      "Dynamic QR token system with expiry validation for tamper-proof attendance",
-      "Batch accelerometer ingestion supporting multiple samples per request",
-      "GPS tracking with latest marker and history polyline map rendering",
-      "Cross-group API compatibility following API Contract Simple v1",
-      "Serverless backend using Google Apps Script + Google Sheets",
-      "Cloud Computing Midterm Practicum Project — Universitas Airlangga 2026",
+      `Fine-tuned IndoBERT (indobenchmark/indobert-base-p1) on ${indobert.samples} Indonesian emails`,
+      "End-to-end NLP pipeline: cleaning → preprocessing → tokenization → training → evaluation",
+      `${indobert.accuracy} accuracy and ${indobert.f1} F1-score on unseen test data (${indobert.errors} of ${indobert.testSize} misclassified)`,
+      "Single and bulk CSV prediction in a Streamlit app, with a confidence score per prediction",
+      "Overfitting analysed through learning curves, with mitigation strategies documented",
+      "Data Mining Final Project — Universitas Airlangga 2026",
     ],
   },
   {
@@ -86,9 +54,10 @@ The application includes an automated business insight section that highlights t
 Key technical achievements include building a full ARM pipeline from raw CSV parsing to one-hot encoding, frequent itemset mining, and rule generation — all within a single-file Streamlit app with no backend required.`,
     thumbnail: "/images/projects/arm.webp",
     techStack: ["Python", "Streamlit", "Pandas", "mlxtend"],
-    githubUrl: "https://github.com/nekyolla/apriori",
+    // The old repo link (github.com/nekyolla/apriori) returns 404 — add the new one here if it moved
+    githubUrl: "",
     liveUrl: "",
-    period: "2025",
+    period: "2026",
     teamSize: 1,
     role: "Data Analyst",
     highlights: [
@@ -145,15 +114,103 @@ Backend security follows OWASP Top 10 API Security standards with strict input v
     ],
   },
   {
+    id: "2",
+    slug: "cloudtrack",
+    title: "CloudTrack",
+    shortDesc:
+      "A cloud-based IoT telemetry and attendance platform supporting QR-based check-in, accelerometer batch streaming, and real-time GPS tracking with map visualization.",
+    impact: "QR attendance + accelerometer + GPS in one API",
+    fullDesc: `CloudTrack is a cloud-based platform built for Universitas Airlangga's Cloud Computing practicum. It integrates three core modules — dynamic QR attendance, accelerometer telemetry, and GPS tracking — into a single unified API following the API Contract Simple v1 standard.
+
+The backend is powered by Google Apps Script (GAS) with Google Sheets as the storage layer, handling four data sheets: tokens, presence, accel, and gps. The web client is built with TypeScript and deployed on Vercel, providing an interface for QR scanning, sensor data streaming, and live map visualization using marker and polyline rendering.
+
+The system follows a strict cross-group compatibility contract — any client from other groups can connect to this server and vice versa, enabling swap testing as part of the course assessment.
+
+Key technical achievements include implementing a stateless token-based QR attendance system with expiry validation, building a batch accelerometer ingestion pipeline, and rendering GPS history as polylines on an interactive map.`,
+    thumbnail: "/images/projects/cloudtrack.webp",
+    techStack: ["Google Apps Script", "Google Sheets", "TypeScript", "Next.js", "Vercel", "REST API", "Postman"],
+    githubUrl: "https://github.com/nekyolla/cloud-computing-uts",
+    liveUrl: "https://cloudk4.vercel.app",
+    period: "Feb 2026",
+    teamSize: 4,
+    role: "Backend Engineer and Documentator",
+    highlights: [
+      "Dynamic QR token system with expiry validation for tamper-proof attendance",
+      "Batch accelerometer ingestion supporting multiple samples per request",
+      "GPS tracking with latest marker and history polyline map rendering",
+      "Cross-group API compatibility following API Contract Simple v1",
+      "Serverless backend using Google Apps Script + Google Sheets",
+      "Cloud Computing Midterm Practicum Project — Universitas Airlangga 2026",
+    ],
+  },
+  {
+    id: "7",
+    slug: "tows-analyzer",
+    title: "TOWS Analyzer",
+    shortDesc:
+      "A browser-based TOWS strategic analysis tool built during the KKN BBK-8 community service program to help map a village's potential.",
+    impact: "Automatic SAP + ETOP scoring · no backend",
+    fullDesc: `TOWS Analyzer was built during Universitas Airlangga's KKN BBK-8 community service program in Tuban to support village potential mapping. It turns a TOWS (Threats, Opportunities, Weaknesses, Strengths) analysis into a guided calculator that village stakeholders can use without any setup.
+
+External factors are entered as weighted threats and opportunities, while internal weaknesses and strengths are grouped into the 8M categories, each with its own category weight.
+
+From those inputs the app calculates the SAP (Strategic Advantage Profile) and ETOP (Environmental Threat and Opportunity Profile) automatically and positions the result in a strategy quadrant.
+
+It runs fully in the browser — React, Vite and TailwindCSS with no backend — and is deployed on Vercel.`,
+    thumbnail: "/images/projects/tows.webp",
+    techStack: ["React", "Vite", "TailwindCSS", "Vercel"],
+    githubUrl: "https://github.com/nekyolla/tows-analyzer-bbk8-sidotentrem",
+    liveUrl: "https://tows-calculator.vercel.app",
+    period: "2026",
+    role: "Developer",
+    highlights: [
+      "Automated SAP and ETOP calculation with quadrant-based strategy positioning",
+      "Internal factors grouped into the 8M categories with per-category weights",
+      "Fully client-side: no backend, accessible to village stakeholders from any browser",
+      "Built for village potential mapping in the KKN BBK-8 community service program (Tuban)",
+    ],
+  },
+  {
+    id: "1",
+    slug: "skp",
+    title: "Student Achievement Credit System (SKP)",
+    shortDesc:
+      "A REST API backend for reporting and verifying student achievements with role-based access control, built with Go and Fiber using dual-database architecture.",
+    impact: `${skp.endpoints}+ endpoints · ${skp.roles} roles · draft\u00a0→\u00a0verified workflow`,
+    fullDesc: `The Student Achievement Credit System (SKP) is a backend REST API built for Universitas Airlangga's Informatics Engineering program. It enables students to report their academic and non-academic achievements, advisors to verify them, and admins to manage the entire system.
+
+The system uses a dual-database architecture: PostgreSQL handles relational data and RBAC (roles, permissions, users, students, lecturers), while MongoDB stores dynamic achievement data with flexible fields per achievement type — competitions, publications, organizations, certifications, and more.
+
+Authentication is handled via JWT with a custom RBAC middleware that checks permissions on every endpoint. The achievement workflow follows a draft → submitted → verified/rejected lifecycle, with each state transition triggering notifications to relevant parties.
+
+Key technical achievements include designing a hybrid PostgreSQL + MongoDB architecture that balances relational integrity with document flexibility, implementing a fine-grained RBAC system with 6+ permissions, and building a dynamic schema for achievement details that adapts per category without schema migrations.`,
+    thumbnail: "/images/projects/skp.webp",
+    techStack: ["Go", "Fiber", "PostgreSQL", "MongoDB", "JWT", "Swagger", "REST API"],
+    githubUrl: "https://github.com/nekyolla/sistem-kredit-prestasi",
+    liveUrl: "",
+    period: "Nov 2025 - Jan 2026",
+    teamSize: 1,
+    role: "Backend Developer",
+    highlights: [
+      "Dual-database architecture: PostgreSQL for RBAC + MongoDB for dynamic achievement data",
+      `Fine-grained RBAC with ${skp.roles} roles (Admin, Student, Advisor) and 6+ permissions`,
+      "Achievement workflow: draft → submitted → verified / rejected",
+      `Supports ${skp.achievementTypes} achievement types with flexible dynamic fields per category`,
+      `Full Swagger API documentation with ${skp.endpoints}+ endpoints, tested via Postman collections`,
+      "Unit tests for every service function, with external dependencies mocked",
+      "Final Project — Advanced Backend Programming Practicum, Universitas Airlangga",
+    ],
+  },
+  {
     id: "5",
     slug: "nekyolla-portfolio",
     title: "Nekyolla Portfolio",
     shortDesc:
       "A modern, data-driven personal portfolio built with Next.js 16, featuring an editorial serif design, light/dark themes, dynamic project pages, and smooth scroll animations.",
     impact: "WCAG AA, 0 axe violations",
-    fullDesc: `This personal portfolio website showcases my profile, education, organizational experience, skills, projects, and certificates in a single, editorial-style interface.
+    fullDesc: `This personal portfolio website showcases my profile, work experience, education, organizations, skills, projects, and certificates in a single, editorial-style interface.
 
-The site follows a fully data-driven architecture — all content (projects, education, organizations, skills, certificates, and gallery) lives in separate TypeScript data files, allowing content updates without touching any UI components. Each project automatically generates its own detail page via Static Site Generation based on its slug.
+The site follows a fully data-driven architecture — all content (experience, projects, education, organizations, skills, certificates, and gallery) lives in separate TypeScript data files, allowing content updates without touching any UI components. Each project automatically generates its own detail page via Static Site Generation based on its slug.
 
 The design pairs a warm serif display typeface with a clean sans-serif, on a paper-like ivory palette with a matching charcoal dark mode. Motion is deliberately calm: smooth inertial scrolling, masked text reveals, and soft blur-fade transitions — all of which switch off automatically for visitors who prefer reduced motion.
 
@@ -161,7 +218,7 @@ Key technical achievements include a fully type-safe data layer, mostly server-r
     thumbnail: "/images/projects/portfolio.webp",
     techStack: ["Next.js", "TypeScript", "TailwindCSS", "Framer Motion", "Lenis", "Vercel"],
     githubUrl: "https://github.com/nekyolla/portfolio",
-    liveUrl: "https://nekyollas-portfolio.vercel.app/",
+    liveUrl: "https://portfolio-astral-express.vercel.app/",
     period: "2026",
     teamSize: 1,
     role: "Developer",
