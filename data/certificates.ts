@@ -14,6 +14,16 @@ export const certificates: Certificate[] = [
     previewImage: "/certificate/previews/aws-ai-practitioner.webp",
   },
   {
+    id: "13",
+    title: "Belajar Dasar Data Science",
+    issuer: "Dicoding Indonesia",
+    date: "November 2026",
+    credentialId: "81P2KLYROXOY",
+    credentialUrl: "https://www.dicoding.com/certificates/81P2KLYROXOY",
+    pdfFile: "/certificate/dasar-data-science.pdf",
+    previewImage: "/certificate/previews/dasar-data-science.webp",
+  },
+  {
     id: "11",
     title: "AWS AI Academy 2026 - Level Dasar & Pemula",
     issuer: "Dicoding Indonesia x AWS",
